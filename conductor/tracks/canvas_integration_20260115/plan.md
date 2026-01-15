@@ -19,8 +19,8 @@ This plan outlines the steps to integrate the Showbox Core library with the Show
 
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Canvas Implementation' (Protocol in workflow.md)
 
-## Phase 4: Integration Testing and Cleanup
+## Phase 4: Integration Testing and Cleanup [checkpoint: f03dcc9]
 
-- [ ] Task: End-to-end test of widget rendering in Canvas
-- [ ] Task: Documentation update for the new integration pattern
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Integration Testing and Cleanup' (Protocol in workflow.md)
+- [x] Task: End-to-end test of widget rendering in Canvas 082f4d1
+- [x] Task: Documentation update for the new integration pattern 6248f60
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Integration Testing and Cleanup' (Protocol in workflow.md)
