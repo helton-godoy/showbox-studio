@@ -1,5 +1,5 @@
-/app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_theme_manager.cpp: /app/showbox/libs/showbox-ui/include/theme_manager.h \
-  /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/moc_predefs.h \
+/workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_theme_manager.cpp: /workspace/showbox/libs/showbox-ui/include/theme_manager.h \
+  /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/moc_predefs.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \

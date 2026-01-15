@@ -10,50 +10,18 @@ O Studio é construído sobre a biblioteca **showbox-ui** (Core), garantindo que
 
 Para adicionar um novo widget ao ecossistema e torná-lo disponível no Studio:
 
-1.  **Core (showbox-ui):**
-    - Implemente o widget em
+1. **Core (showbox-ui):**
+   - Implemente o widget em `libs/showbox-ui/src`
 
-```
-libs/showbox-ui/src
-```
+   - Registre o widget na `WidgetFactory` em `libs/showbox-ui/src/widget_factory.cpp`.
 
-    - Registre o widget na
-
-```
-WidgetFactory
-```
-
-em
-
-```
-libs/showbox-ui/src/widget_factory.cpp
-```
-
-.
-`cpp
+```cpp
     reg["meu_widget"] = []() { return new MeuWidget(); };
-    `
-
-2.  **Studio (showbox-studio):**
-    - Adicione o método de criação na interface
-
-```
-IStudioWidgetFactory.h
 ```
 
-. - Implemente o método em
-
-```
-StudioWidgetFactory.h
-```
-
-, delegando para a Core Factory. - Adicione o item correspondente na Toolbox (
-
-```
-MainWindow::setupUI
-```
-
-).
+1. **Studio (showbox-studio):**
+   - Adicione o método de criação na interface `IStudioWidgetFactory.h`.
+   - Implemente o método em `StudioWidgetFactory.h`, delegando para a Core Factory. - Adicione o item correspondente na Toolbox (`MainWindow::setupUI`).
 
 ## Desenvolvimento com Docker
 

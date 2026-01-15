@@ -1,5 +1,5 @@
-/app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_custom_chart_widget.cpp: /app/showbox/libs/showbox-ui/include/custom_chart_widget.h \
-  /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/moc_predefs.h \
+/workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_custom_chart_widget.cpp: /workspace/showbox/libs/showbox-ui/include/custom_chart_widget.h \
+  /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/moc_predefs.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \

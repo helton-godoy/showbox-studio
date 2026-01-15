@@ -1,5 +1,5 @@
-/app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_ObjectInspector.cpp: /app/showbox-studio/src/gui/ObjectInspector.h \
-  /app/showbox-studio/build/showbox-studio_autogen/moc_predefs.h \
+/workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_ObjectInspector.cpp: /workspace/showbox-studio/src/gui/ObjectInspector.h \
+  /workspace/showbox-studio/build/showbox-studio_autogen/moc_predefs.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \

@@ -12,6 +12,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/showbox-ui.dir/src/logger.cpp.o.d"
   "CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.o"
   "CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.o.d"
+  "CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.o"
+  "CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.o.d"
   "libshowbox-ui.a"
   "libshowbox-ui.pdb"
   "showbox-ui_autogen/mocs_compilation.cpp"

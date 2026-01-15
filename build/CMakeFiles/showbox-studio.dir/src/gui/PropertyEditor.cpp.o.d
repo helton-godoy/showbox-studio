@@ -1,6 +1,7 @@
 CMakeFiles/showbox-studio.dir/src/gui/PropertyEditor.cpp.o: \
- /app/showbox-studio/src/gui/PropertyEditor.cpp \
- /usr/include/stdc-predef.h /app/showbox-studio/src/gui/PropertyEditor.h \
+ /workspace/showbox-studio/src/gui/PropertyEditor.cpp \
+ /usr/include/stdc-predef.h \
+ /workspace/showbox-studio/src/gui/PropertyEditor.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QTableWidget \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtablewidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtableview.h \

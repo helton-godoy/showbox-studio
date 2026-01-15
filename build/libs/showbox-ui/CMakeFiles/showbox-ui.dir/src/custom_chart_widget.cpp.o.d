@@ -1,7 +1,7 @@
 libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.o: \
- /app/showbox/libs/showbox-ui/src/custom_chart_widget.cpp \
+ /workspace/showbox/libs/showbox-ui/src/custom_chart_widget.cpp \
  /usr/include/stdc-predef.h \
- /app/showbox/libs/showbox-ui/include/custom_chart_widget.h \
+ /workspace/showbox/libs/showbox-ui/include/custom_chart_widget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCharts/QChartView \
  /usr/include/x86_64-linux-gnu/qt6/QtCharts/qchartview.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCharts/QAbstractAxis \

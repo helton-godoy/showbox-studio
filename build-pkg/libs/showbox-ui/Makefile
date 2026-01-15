@@ -278,6 +278,30 @@ src/theme_manager.cpp.s:
 	cd /workspace/showbox-studio/build-pkg && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.s
 .PHONY : src/theme_manager.cpp.s
 
+src/widget_factory.o: src/widget_factory.cpp.o
+.PHONY : src/widget_factory.o
+
+# target to build an object file
+src/widget_factory.cpp.o:
+	cd /workspace/showbox-studio/build-pkg && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.o
+.PHONY : src/widget_factory.cpp.o
+
+src/widget_factory.i: src/widget_factory.cpp.i
+.PHONY : src/widget_factory.i
+
+# target to preprocess a source file
+src/widget_factory.cpp.i:
+	cd /workspace/showbox-studio/build-pkg && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.i
+.PHONY : src/widget_factory.cpp.i
+
+src/widget_factory.s: src/widget_factory.cpp.s
+.PHONY : src/widget_factory.s
+
+# target to generate assembly for a file
+src/widget_factory.cpp.s:
+	cd /workspace/showbox-studio/build-pkg && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.s
+.PHONY : src/widget_factory.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -304,6 +328,9 @@ help:
 	@echo "... src/theme_manager.o"
 	@echo "... src/theme_manager.i"
 	@echo "... src/theme_manager.s"
+	@echo "... src/widget_factory.o"
+	@echo "... src/widget_factory.i"
+	@echo "... src/widget_factory.s"
 .PHONY : help
 
 

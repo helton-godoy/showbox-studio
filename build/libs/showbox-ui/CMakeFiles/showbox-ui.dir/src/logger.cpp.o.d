@@ -1,6 +1,7 @@
 libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.o: \
- /app/showbox/libs/showbox-ui/src/logger.cpp /usr/include/stdc-predef.h \
- /app/showbox/libs/showbox-ui/include/logger.h \
+ /workspace/showbox/libs/showbox-ui/src/logger.cpp \
+ /usr/include/stdc-predef.h \
+ /workspace/showbox/libs/showbox-ui/include/logger.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QLoggingCategory \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qloggingcategory.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qglobal.h \

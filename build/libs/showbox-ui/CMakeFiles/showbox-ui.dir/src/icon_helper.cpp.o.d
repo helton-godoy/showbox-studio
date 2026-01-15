@@ -1,7 +1,7 @@
 libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.o: \
- /app/showbox/libs/showbox-ui/src/icon_helper.cpp \
+ /workspace/showbox/libs/showbox-ui/src/icon_helper.cpp \
  /usr/include/stdc-predef.h \
- /app/showbox/libs/showbox-ui/include/icon_helper.h \
+ /workspace/showbox/libs/showbox-ui/include/icon_helper.h \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QIcon \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiglobal.h \
@@ -419,6 +419,6 @@ libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication_platform.h \
- /app/showbox/libs/showbox-ui/include/logger.h \
+ /workspace/showbox/libs/showbox-ui/include/logger.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QLoggingCategory \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qloggingcategory.h

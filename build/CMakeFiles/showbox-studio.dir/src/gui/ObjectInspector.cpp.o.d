@@ -1,6 +1,7 @@
 CMakeFiles/showbox-studio.dir/src/gui/ObjectInspector.cpp.o: \
- /app/showbox-studio/src/gui/ObjectInspector.cpp \
- /usr/include/stdc-predef.h /app/showbox-studio/src/gui/ObjectInspector.h \
+ /workspace/showbox-studio/src/gui/ObjectInspector.cpp \
+ /usr/include/stdc-predef.h \
+ /workspace/showbox-studio/src/gui/ObjectInspector.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QTreeWidget \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreewidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreeview.h \

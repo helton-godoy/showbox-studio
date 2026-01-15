@@ -619,8 +619,10 @@ showbox-ui_autogen/timestamp: \
 	/workspace/showbox/libs/showbox-ui/include/icon_helper.h \
 	/workspace/showbox/libs/showbox-ui/include/logger.h \
 	/workspace/showbox/libs/showbox-ui/include/theme_manager.h \
+	/workspace/showbox/libs/showbox-ui/include/widget_factory.h \
 	/workspace/showbox/libs/showbox-ui/src/custom_chart_widget.cpp \
 	/workspace/showbox/libs/showbox-ui/src/icon_helper.cpp \
 	/workspace/showbox/libs/showbox-ui/src/logger.cpp \
 	/workspace/showbox/libs/showbox-ui/src/theme_manager.cpp \
+	/workspace/showbox/libs/showbox-ui/src/widget_factory.cpp \
 	/usr/bin/cmake

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /app/showbox-studio
+CMAKE_SOURCE_DIR = /workspace/showbox-studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /app/showbox-studio/build
+CMAKE_BINARY_DIR = /workspace/showbox-studio/build
 
 # Utility rule file for showbox-ui_autogen_timestamp_deps.
 
@@ -77,10 +77,10 @@ libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/build: showbox-
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/build
 
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/clean:
-	cd /app/showbox-studio/build/libs/showbox-ui && $(CMAKE_COMMAND) -P CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/cmake_clean.cmake
+	cd /workspace/showbox-studio/build/libs/showbox-ui && $(CMAKE_COMMAND) -P CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/cmake_clean.cmake
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/clean
 
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/depend:
-	cd /app/showbox-studio/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /app/showbox-studio /app/showbox/libs/showbox-ui /app/showbox-studio/build /app/showbox-studio/build/libs/showbox-ui /app/showbox-studio/build/libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /workspace/showbox-studio/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /workspace/showbox-studio /workspace/showbox/libs/showbox-ui /workspace/showbox-studio/build /workspace/showbox-studio/build/libs/showbox-ui /workspace/showbox-studio/build/libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/depend
 

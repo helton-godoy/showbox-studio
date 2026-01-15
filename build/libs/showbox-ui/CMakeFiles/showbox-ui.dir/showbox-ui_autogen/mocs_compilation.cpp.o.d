@@ -1,8 +1,8 @@
 libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.o: \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/mocs_compilation.cpp \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_custom_chart_widget.cpp \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/../../../../../../showbox/libs/showbox-ui/include/custom_chart_widget.h \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_custom_chart_widget.cpp \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/../../../../../../showbox/libs/showbox-ui/include/custom_chart_widget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCharts/QChartView \
  /usr/include/x86_64-linux-gnu/qt6/QtCharts/qchartview.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCharts/QAbstractAxis \
@@ -468,8 +468,8 @@ libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cp
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QMouseEvent \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qtmochelpers.h \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_custom_table_widget.cpp \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/../../../../../../showbox/libs/showbox-ui/include/custom_table_widget.h \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_custom_table_widget.cpp \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/../../../../../../showbox/libs/showbox-ui/include/custom_table_widget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QTableWidget \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtablewidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtableview.h \
@@ -540,8 +540,8 @@ libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cp
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgridlayout.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QDebug \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_theme_manager.cpp \
- /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/../../../../../../showbox/libs/showbox-ui/include/theme_manager.h \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/moc_theme_manager.cpp \
+ /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/6YEA5652QU/../../../../../../showbox/libs/showbox-ui/include/theme_manager.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QGuiApplication \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication.h \

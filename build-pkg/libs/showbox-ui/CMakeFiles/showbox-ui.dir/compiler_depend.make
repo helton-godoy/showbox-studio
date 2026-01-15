@@ -622,10 +622,12 @@ libs/showbox-ui/showbox-ui_autogen/timestamp: /usr/bin/cmake \
   /workspace/showbox/libs/showbox-ui/include/icon_helper.h \
   /workspace/showbox/libs/showbox-ui/include/logger.h \
   /workspace/showbox/libs/showbox-ui/include/theme_manager.h \
+  /workspace/showbox/libs/showbox-ui/include/widget_factory.h \
   /workspace/showbox/libs/showbox-ui/src/custom_chart_widget.cpp \
   /workspace/showbox/libs/showbox-ui/src/icon_helper.cpp \
   /workspace/showbox/libs/showbox-ui/src/logger.cpp \
-  /workspace/showbox/libs/showbox-ui/src/theme_manager.cpp
+  /workspace/showbox/libs/showbox-ui/src/theme_manager.cpp \
+  /workspace/showbox/libs/showbox-ui/src/widget_factory.cpp
 
 
 /workspace/showbox/libs/showbox-ui/src/custom_chart_widget.cpp:
@@ -1508,6 +1510,8 @@ libs/showbox-ui/showbox-ui_autogen/moc_predefs.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen.h:
 
+/workspace/showbox/libs/showbox-ui/src/widget_factory.cpp:
+
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qarraydatapointer.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qanystringview.h:
@@ -1589,6 +1593,8 @@ libs/showbox-ui/showbox-ui_autogen/moc_predefs.h:
 /usr/share/cmake-3.31/Modules/Compiler/AppleClang-DetermineCompiler.cmake:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qhashfunctions.h:
+
+/workspace/showbox/libs/showbox-ui/include/widget_factory.h:
 
 /usr/include/c++/14/bits/parse_numbers.h:
 

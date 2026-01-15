@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /app/showbox-studio
+CMAKE_SOURCE_DIR = /workspace/showbox-studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /app/showbox-studio/build
+CMAKE_BINARY_DIR = /workspace/showbox-studio/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /app/showbox-studio/build && $(CMAKE_COMMAND) -E cmake_progress_start /app/showbox-studio/build/CMakeFiles /app/showbox-studio/build/libs/showbox-ui//CMakeFiles/progress.marks
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /app/showbox-studio/build/CMakeFiles 0
+	cd /workspace/showbox-studio/build && $(CMAKE_COMMAND) -E cmake_progress_start /workspace/showbox-studio/build/CMakeFiles /workspace/showbox-studio/build/libs/showbox-ui//CMakeFiles/progress.marks
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspace/showbox-studio/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/clean
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/preinstall
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/preinstall
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /app/showbox-studio/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /workspace/showbox-studio/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 libs/showbox-ui/CMakeFiles/showbox-ui.dir/rule:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/CMakeFiles/showbox-ui.dir/rule
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/CMakeFiles/showbox-ui.dir/rule
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui.dir/rule
 
 # Convenience name for target.
@@ -127,12 +127,12 @@ showbox-ui: libs/showbox-ui/CMakeFiles/showbox-ui.dir/rule
 
 # fast build rule for target.
 showbox-ui/fast:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/build
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/build
 .PHONY : showbox-ui/fast
 
 # Convenience name for target.
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/rule:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/rule
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/rule
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/rule
 
 # Convenience name for target.
@@ -141,12 +141,12 @@ showbox-ui_autogen_timestamp_deps: libs/showbox-ui/CMakeFiles/showbox-ui_autogen
 
 # fast build rule for target.
 showbox-ui_autogen_timestamp_deps/fast:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/build
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui_autogen_timestamp_deps.dir/build
 .PHONY : showbox-ui_autogen_timestamp_deps/fast
 
 # Convenience name for target.
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/rule:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/rule
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/rule
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/rule
 
 # Convenience name for target.
@@ -155,7 +155,7 @@ showbox-ui_autogen: libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/rule
 
 # fast build rule for target.
 showbox-ui_autogen/fast:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/build
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/build
 .PHONY : showbox-ui_autogen/fast
 
 showbox-ui_autogen/mocs_compilation.o: showbox-ui_autogen/mocs_compilation.cpp.o
@@ -163,7 +163,7 @@ showbox-ui_autogen/mocs_compilation.o: showbox-ui_autogen/mocs_compilation.cpp.o
 
 # target to build an object file
 showbox-ui_autogen/mocs_compilation.cpp.o:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.o
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.o
 .PHONY : showbox-ui_autogen/mocs_compilation.cpp.o
 
 showbox-ui_autogen/mocs_compilation.i: showbox-ui_autogen/mocs_compilation.cpp.i
@@ -171,7 +171,7 @@ showbox-ui_autogen/mocs_compilation.i: showbox-ui_autogen/mocs_compilation.cpp.i
 
 # target to preprocess a source file
 showbox-ui_autogen/mocs_compilation.cpp.i:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.i
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.i
 .PHONY : showbox-ui_autogen/mocs_compilation.cpp.i
 
 showbox-ui_autogen/mocs_compilation.s: showbox-ui_autogen/mocs_compilation.cpp.s
@@ -179,7 +179,7 @@ showbox-ui_autogen/mocs_compilation.s: showbox-ui_autogen/mocs_compilation.cpp.s
 
 # target to generate assembly for a file
 showbox-ui_autogen/mocs_compilation.cpp.s:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.s
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/showbox-ui_autogen/mocs_compilation.cpp.s
 .PHONY : showbox-ui_autogen/mocs_compilation.cpp.s
 
 src/custom_chart_widget.o: src/custom_chart_widget.cpp.o
@@ -187,7 +187,7 @@ src/custom_chart_widget.o: src/custom_chart_widget.cpp.o
 
 # target to build an object file
 src/custom_chart_widget.cpp.o:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.o
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.o
 .PHONY : src/custom_chart_widget.cpp.o
 
 src/custom_chart_widget.i: src/custom_chart_widget.cpp.i
@@ -195,7 +195,7 @@ src/custom_chart_widget.i: src/custom_chart_widget.cpp.i
 
 # target to preprocess a source file
 src/custom_chart_widget.cpp.i:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.i
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.i
 .PHONY : src/custom_chart_widget.cpp.i
 
 src/custom_chart_widget.s: src/custom_chart_widget.cpp.s
@@ -203,7 +203,7 @@ src/custom_chart_widget.s: src/custom_chart_widget.cpp.s
 
 # target to generate assembly for a file
 src/custom_chart_widget.cpp.s:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.s
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/custom_chart_widget.cpp.s
 .PHONY : src/custom_chart_widget.cpp.s
 
 src/icon_helper.o: src/icon_helper.cpp.o
@@ -211,7 +211,7 @@ src/icon_helper.o: src/icon_helper.cpp.o
 
 # target to build an object file
 src/icon_helper.cpp.o:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.o
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.o
 .PHONY : src/icon_helper.cpp.o
 
 src/icon_helper.i: src/icon_helper.cpp.i
@@ -219,7 +219,7 @@ src/icon_helper.i: src/icon_helper.cpp.i
 
 # target to preprocess a source file
 src/icon_helper.cpp.i:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.i
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.i
 .PHONY : src/icon_helper.cpp.i
 
 src/icon_helper.s: src/icon_helper.cpp.s
@@ -227,7 +227,7 @@ src/icon_helper.s: src/icon_helper.cpp.s
 
 # target to generate assembly for a file
 src/icon_helper.cpp.s:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.s
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/icon_helper.cpp.s
 .PHONY : src/icon_helper.cpp.s
 
 src/logger.o: src/logger.cpp.o
@@ -235,7 +235,7 @@ src/logger.o: src/logger.cpp.o
 
 # target to build an object file
 src/logger.cpp.o:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.o
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.o
 .PHONY : src/logger.cpp.o
 
 src/logger.i: src/logger.cpp.i
@@ -243,7 +243,7 @@ src/logger.i: src/logger.cpp.i
 
 # target to preprocess a source file
 src/logger.cpp.i:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.i
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.i
 .PHONY : src/logger.cpp.i
 
 src/logger.s: src/logger.cpp.s
@@ -251,7 +251,7 @@ src/logger.s: src/logger.cpp.s
 
 # target to generate assembly for a file
 src/logger.cpp.s:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.s
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/logger.cpp.s
 .PHONY : src/logger.cpp.s
 
 src/theme_manager.o: src/theme_manager.cpp.o
@@ -259,7 +259,7 @@ src/theme_manager.o: src/theme_manager.cpp.o
 
 # target to build an object file
 src/theme_manager.cpp.o:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.o
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.o
 .PHONY : src/theme_manager.cpp.o
 
 src/theme_manager.i: src/theme_manager.cpp.i
@@ -267,7 +267,7 @@ src/theme_manager.i: src/theme_manager.cpp.i
 
 # target to preprocess a source file
 src/theme_manager.cpp.i:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.i
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.i
 .PHONY : src/theme_manager.cpp.i
 
 src/theme_manager.s: src/theme_manager.cpp.s
@@ -275,8 +275,32 @@ src/theme_manager.s: src/theme_manager.cpp.s
 
 # target to generate assembly for a file
 src/theme_manager.cpp.s:
-	cd /app/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.s
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/theme_manager.cpp.s
 .PHONY : src/theme_manager.cpp.s
+
+src/widget_factory.o: src/widget_factory.cpp.o
+.PHONY : src/widget_factory.o
+
+# target to build an object file
+src/widget_factory.cpp.o:
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.o
+.PHONY : src/widget_factory.cpp.o
+
+src/widget_factory.i: src/widget_factory.cpp.i
+.PHONY : src/widget_factory.i
+
+# target to preprocess a source file
+src/widget_factory.cpp.i:
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.i
+.PHONY : src/widget_factory.cpp.i
+
+src/widget_factory.s: src/widget_factory.cpp.s
+.PHONY : src/widget_factory.s
+
+# target to generate assembly for a file
+src/widget_factory.cpp.s:
+	cd /workspace/showbox-studio/build && $(MAKE) $(MAKESILENT) -f libs/showbox-ui/CMakeFiles/showbox-ui.dir/build.make libs/showbox-ui/CMakeFiles/showbox-ui.dir/src/widget_factory.cpp.s
+.PHONY : src/widget_factory.cpp.s
 
 # Help Target
 help:
@@ -304,6 +328,9 @@ help:
 	@echo "... src/theme_manager.o"
 	@echo "... src/theme_manager.i"
 	@echo "... src/theme_manager.s"
+	@echo "... src/widget_factory.o"
+	@echo "... src/widget_factory.i"
+	@echo "... src/widget_factory.s"
 .PHONY : help
 
 
@@ -315,6 +342,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /app/showbox-studio/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /workspace/showbox-studio/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -122,6 +122,12 @@
 			"MU",
 			"6YEA5652QU/moc_theme_manager.cpp",
 			null
+		],
+		[
+			"/workspace/showbox/libs/showbox-ui/include/widget_factory.h",
+			"MU",
+			"6YEA5652QU/moc_widget_factory.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -207,6 +213,11 @@
 		[ "/workspace/showbox/libs/showbox-ui/src/logger.cpp", "MU", null ],
 		[
 			"/workspace/showbox/libs/showbox-ui/src/theme_manager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/workspace/showbox/libs/showbox-ui/src/widget_factory.cpp",
 			"MU",
 			null
 		]

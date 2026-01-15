@@ -1,5 +1,5 @@
-/app/showbox-studio/build/showbox-studio_autogen/PRMOGMWJPH/moc_StudioController.cpp: /app/showbox-studio/src/core/StudioController.h \
-  /app/showbox-studio/build/showbox-studio_autogen/moc_predefs.h \
+/workspace/showbox-studio/build/showbox-studio_autogen/PRMOGMWJPH/moc_StudioController.cpp: /workspace/showbox-studio/src/core/StudioController.h \
+  /workspace/showbox-studio/build/showbox-studio_autogen/moc_predefs.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \

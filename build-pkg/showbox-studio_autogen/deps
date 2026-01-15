@@ -398,6 +398,8 @@ showbox-studio_autogen/timestamp: \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qversiontagging.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qxptype_traits.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qyieldcpu.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtGui/QDragEnterEvent \
+	/usr/include/x86_64-linux-gnu/qt6/QtGui/QDropEvent \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/QMouseEvent \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/QTransform \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h \

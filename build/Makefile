@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /app/showbox-studio
+CMAKE_SOURCE_DIR = /workspace/showbox-studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /app/showbox-studio/build
+CMAKE_BINARY_DIR = /workspace/showbox-studio/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /app/showbox-studio/build/CMakeFiles /app/showbox-studio/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspace/showbox-studio/build/CMakeFiles /workspace/showbox-studio/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /app/showbox-studio/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspace/showbox-studio/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

@@ -1,7 +1,7 @@
 CMakeFiles/showbox-studio.dir/src/core/StudioController.cpp.o: \
- /app/showbox-studio/src/core/StudioController.cpp \
+ /workspace/showbox-studio/src/core/StudioController.cpp \
  /usr/include/stdc-predef.h \
- /app/showbox-studio/src/core/StudioController.h \
+ /workspace/showbox-studio/src/core/StudioController.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs.h \

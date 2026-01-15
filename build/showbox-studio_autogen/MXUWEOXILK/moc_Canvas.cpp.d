@@ -1,5 +1,5 @@
-/app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_Canvas.cpp: /app/showbox-studio/src/gui/Canvas.h \
-  /app/showbox-studio/build/showbox-studio_autogen/moc_predefs.h \
+/workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_Canvas.cpp: /workspace/showbox-studio/src/gui/Canvas.h \
+  /workspace/showbox-studio/build/showbox-studio_autogen/moc_predefs.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \

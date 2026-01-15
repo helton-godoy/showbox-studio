@@ -1,8 +1,8 @@
 CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o: \
- /app/showbox-studio/build/showbox-studio_autogen/mocs_compilation.cpp \
+ /workspace/showbox-studio/build/showbox-studio_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /app/showbox-studio/build/showbox-studio_autogen/PRMOGMWJPH/moc_StudioController.cpp \
- /app/showbox-studio/build/showbox-studio_autogen/PRMOGMWJPH/../../../src/core/StudioController.h \
+ /workspace/showbox-studio/build/showbox-studio_autogen/PRMOGMWJPH/moc_StudioController.cpp \
+ /workspace/showbox-studio/build/showbox-studio_autogen/PRMOGMWJPH/../../../src/core/StudioController.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs.h \
@@ -423,8 +423,8 @@ CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication_platform.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qtmochelpers.h \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_Canvas.cpp \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/Canvas.h \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_Canvas.cpp \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/Canvas.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QVBoxLayout \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qboxlayout.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qlayout.h \
@@ -433,14 +433,14 @@ CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgridlayout.h \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QDragEnterEvent \
  /usr/include/x86_64-linux-gnu/qt6/QtGui/QDropEvent \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_MainWindow.cpp \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/MainWindow.h \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_MainWindow.cpp \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/MainWindow.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QMainWindow \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qmainwindow.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtabwidget.h \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_ObjectInspector.cpp \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/ObjectInspector.h \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_ObjectInspector.cpp \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/ObjectInspector.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QTreeWidget \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreewidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreeview.h \
@@ -460,8 +460,8 @@ CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtabbar.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qrubberband.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreewidgetitemiterator.h \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_PropertyEditor.cpp \
- /app/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/PropertyEditor.h \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/moc_PropertyEditor.cpp \
+ /workspace/showbox-studio/build/showbox-studio_autogen/MXUWEOXILK/../../../src/gui/PropertyEditor.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QTableWidget \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtablewidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtableview.h

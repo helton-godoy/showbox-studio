@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /app/showbox-studio
+CMAKE_SOURCE_DIR = /workspace/showbox-studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /app/showbox-studio/build
+CMAKE_BINARY_DIR = /workspace/showbox-studio/build
 
 # Utility rule file for showbox-ui_autogen.
 
@@ -71,9 +71,9 @@ libs/showbox-ui/CMakeFiles/showbox-ui_autogen: libs/showbox-ui/showbox-ui_autoge
 libs/showbox-ui/showbox-ui_autogen/timestamp: /usr/lib/qt6/libexec/moc
 libs/showbox-ui/showbox-ui_autogen/timestamp: /usr/lib/qt6/libexec/uic
 libs/showbox-ui/showbox-ui_autogen/timestamp: libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/app/showbox-studio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target showbox-ui"
-	cd /app/showbox-studio/build/libs/showbox-ui && /usr/bin/cmake -E cmake_autogen /app/showbox-studio/build/libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/AutogenInfo.json ""
-	cd /app/showbox-studio/build/libs/showbox-ui && /usr/bin/cmake -E touch /app/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/timestamp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/workspace/showbox-studio/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target showbox-ui"
+	cd /workspace/showbox-studio/build/libs/showbox-ui && /usr/bin/cmake -E cmake_autogen /workspace/showbox-studio/build/libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/AutogenInfo.json ""
+	cd /workspace/showbox-studio/build/libs/showbox-ui && /usr/bin/cmake -E touch /workspace/showbox-studio/build/libs/showbox-ui/showbox-ui_autogen/timestamp
 
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/codegen:
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/codegen
@@ -88,10 +88,10 @@ libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/build: showbox-ui_autogen
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/build
 
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/clean:
-	cd /app/showbox-studio/build/libs/showbox-ui && $(CMAKE_COMMAND) -P CMakeFiles/showbox-ui_autogen.dir/cmake_clean.cmake
+	cd /workspace/showbox-studio/build/libs/showbox-ui && $(CMAKE_COMMAND) -P CMakeFiles/showbox-ui_autogen.dir/cmake_clean.cmake
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/clean
 
 libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/depend:
-	cd /app/showbox-studio/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /app/showbox-studio /app/showbox/libs/showbox-ui /app/showbox-studio/build /app/showbox-studio/build/libs/showbox-ui /app/showbox-studio/build/libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /workspace/showbox-studio/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /workspace/showbox-studio /workspace/showbox/libs/showbox-ui /workspace/showbox-studio/build /workspace/showbox-studio/build/libs/showbox-ui /workspace/showbox-studio/build/libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : libs/showbox-ui/CMakeFiles/showbox-ui_autogen.dir/depend
 

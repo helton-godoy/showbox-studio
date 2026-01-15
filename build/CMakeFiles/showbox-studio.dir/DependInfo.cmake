@@ -9,13 +9,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "" "showbox-studio_autogen/timestamp" "custom" "showbox-studio_autogen/deps"
-  "/app/showbox-studio/build/showbox-studio_autogen/mocs_compilation.cpp" "CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o.d"
-  "/app/showbox-studio/src/core/StudioController.cpp" "CMakeFiles/showbox-studio.dir/src/core/StudioController.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/core/StudioController.cpp.o.d"
-  "/app/showbox-studio/src/gui/Canvas.cpp" "CMakeFiles/showbox-studio.dir/src/gui/Canvas.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/Canvas.cpp.o.d"
-  "/app/showbox-studio/src/gui/MainWindow.cpp" "CMakeFiles/showbox-studio.dir/src/gui/MainWindow.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/MainWindow.cpp.o.d"
-  "/app/showbox-studio/src/gui/ObjectInspector.cpp" "CMakeFiles/showbox-studio.dir/src/gui/ObjectInspector.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/ObjectInspector.cpp.o.d"
-  "/app/showbox-studio/src/gui/PropertyEditor.cpp" "CMakeFiles/showbox-studio.dir/src/gui/PropertyEditor.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/PropertyEditor.cpp.o.d"
-  "/app/showbox-studio/src/main.cpp" "CMakeFiles/showbox-studio.dir/src/main.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/main.cpp.o.d"
+  "/workspace/showbox-studio/build/showbox-studio_autogen/mocs_compilation.cpp" "CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/showbox-studio_autogen/mocs_compilation.cpp.o.d"
+  "/workspace/showbox-studio/src/core/StudioController.cpp" "CMakeFiles/showbox-studio.dir/src/core/StudioController.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/core/StudioController.cpp.o.d"
+  "/workspace/showbox-studio/src/gui/Canvas.cpp" "CMakeFiles/showbox-studio.dir/src/gui/Canvas.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/Canvas.cpp.o.d"
+  "/workspace/showbox-studio/src/gui/MainWindow.cpp" "CMakeFiles/showbox-studio.dir/src/gui/MainWindow.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/MainWindow.cpp.o.d"
+  "/workspace/showbox-studio/src/gui/ObjectInspector.cpp" "CMakeFiles/showbox-studio.dir/src/gui/ObjectInspector.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/ObjectInspector.cpp.o.d"
+  "/workspace/showbox-studio/src/gui/PropertyEditor.cpp" "CMakeFiles/showbox-studio.dir/src/gui/PropertyEditor.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/gui/PropertyEditor.cpp.o.d"
+  "/workspace/showbox-studio/src/main.cpp" "CMakeFiles/showbox-studio.dir/src/main.cpp.o" "gcc" "CMakeFiles/showbox-studio.dir/src/main.cpp.o.d"
   "" "showbox-studio" "gcc" "CMakeFiles/showbox-studio.dir/link.d"
   )
 
