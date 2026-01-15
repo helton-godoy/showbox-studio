@@ -5,9 +5,7 @@ This plan outlines the steps to integrate the Showbox Core library with the Show
 ## Phase 1: Project Structure and Linkage
 
 - [x] Task: Validate CMake configuration for library linking 6dc9624
-  - [ ] Ensure `showbox-ui` is correctly exported from the Core repository.
-  - [ ] Verify `showbox-studio` CMakeLists.txt correctly finds and links `showbox-ui`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Structure and Linkage' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Project Structure and Linkage' (Protocol in workflow.md) [checkpoint: a714c6d]
 
 ## Phase 2: Widget Factory Integration
 
