@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 class Canvas;
-class WidgetFactory;
+class IStudioWidgetFactory;
 class ObjectInspector;
 class StudioController;
 class PropertyEditor;
@@ -22,7 +22,7 @@ private:
     void createSampleWidgets();
 
     Canvas *m_canvas;
-    WidgetFactory *m_factory;
+    IStudioWidgetFactory *m_factory;
     ObjectInspector *m_inspector;
     StudioController *m_controller;
     PropertyEditor *m_propEditor;

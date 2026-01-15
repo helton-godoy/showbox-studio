@@ -6,13 +6,13 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 
-class WidgetFactory;
+class IStudioWidgetFactory;
 
 class Canvas : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Canvas(WidgetFactory *factory, QWidget *parent = nullptr);
+    explicit Canvas(IStudioWidgetFactory *factory, QWidget *parent = nullptr);
     
     void addWidget(QWidget *widget);
 
@@ -26,7 +26,7 @@ protected:
 
 private:
     QVBoxLayout *m_layout;
-    WidgetFactory *m_factory;
+    IStudioWidgetFactory *m_factory;
 };
 
 #endif // CANVAS_H

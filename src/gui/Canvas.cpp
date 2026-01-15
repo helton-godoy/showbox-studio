@@ -1,9 +1,9 @@
 #include "Canvas.h"
-#include "../core/WidgetFactory.h"
+#include "../core/IStudioWidgetFactory.h"
 #include <QMimeData>
 #include <QDebug>
 
-Canvas::Canvas(WidgetFactory *factory, QWidget *parent) 
+Canvas::Canvas(IStudioWidgetFactory *factory, QWidget *parent) 
     : QWidget(parent), m_factory(factory)
 {
     m_layout = new QVBoxLayout(this);

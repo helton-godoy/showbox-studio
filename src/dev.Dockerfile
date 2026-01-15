@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalar dependências de build e runtime
 # Inclui Qt6 (Base, Charts, SVG) e ferramentas (CMake, Ninja, GDB)
-RUN apt-get update -qq && apt-get install -qqy \
+RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
     build-essential \
     cmake \
     ninja-build \

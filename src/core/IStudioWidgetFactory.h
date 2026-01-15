@@ -1,12 +1,12 @@
-#ifndef WIDGETFACTORY_H
-#define WIDGETFACTORY_H
+#ifndef ISTUDIOWIDGETFACTORY_H
+#define ISTUDIOWIDGETFACTORY_H
 
 #include <QWidget>
 #include <QString>
 
-class WidgetFactory {
+class IStudioWidgetFactory {
 public:
-    virtual ~WidgetFactory() = default;
+    virtual ~IStudioWidgetFactory() = default;
     
     virtual QWidget* createPushButton(const QString &title, const QString &name) = 0;
     virtual QWidget* createLabel(const QString &text, const QString &name) = 0;
@@ -14,4 +14,4 @@ public:
     // Adicionaremos os outros 17 conforme progredirmos
 };
 
-#endif // WIDGETFACTORY_H
+#endif // ISTUDIOWIDGETFACTORY_H
