@@ -42,7 +42,15 @@ A interface deve ser flexível e adaptável ao ambiente do usuário, suportada p
   - **Estilo:** Alta densidade de informação, controles compactos, menos espaçamento (padding), linhas guias visíveis.
   - **Objetivo:** Maximizar a área útil para projetos complexos ou dashboards densos (estilo CAD/Engenharia).
 
-## 4. Princípios de Design de Código
+## 4. Organização e Estrutura do Projeto
+
+- **Raiz Limpa:** A raiz do projeto deve ser mantida organizada e livre de poluição.
+- **Localização de Artefatos:** Cada artefato deve ser salvo em uma área apropriadamente definida.
+  - **Justificativa:** A escolha da localização deve ter uma fundamentação clara que justifique a decisão.
+  - **Objetivo:** Facilitar a localização, promover escolhas coerentes e criar uma arquitetura intuitiva.
+- **Ambientes Isolados:** Ambientes de desenvolvimento e empacotamento devem ser segregados (Docker) para evitar contaminação do host e garantir reprodutibilidade.
+
+## 5. Princípios de Design de Código
 
 - **Abstração:** O código C++ deve ser complexo internamente para permitir simplicidade externamente (na interface e no shell script).
 - **Modularidade:** Componentes devem ser independentes. A refatoração do Core para CMake visa garantir que o Studio possa importar _apenas_ o necessário.

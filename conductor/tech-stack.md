@@ -9,6 +9,7 @@
 ## Ferramentas de Desenvolvimento
 
 - **Sistema de Build:** CMake (3.16+). A transição de qmake para CMake é prioritária para suportar a modularidade necessária entre Core e Studio.
+- **Ambiente de Desenvolvimento:** Obrigatório o uso do container Docker definido em `@src/dev.Dockerfile` para garantir consistência e "pronto para uso".
 - **Gerenciamento de Dependências:** CMake FetchContent ou Submodules (para integrar o Core Showbox no Studio).
 - **Linter/Formatter:** Ferramentas compatíveis com o padrão C++ (ex: clang-format).
 
@@ -19,5 +20,10 @@
 
 ## Distribuição e Empacotamento
 
-- **Foco Multiplataforma:** Primariamente Linux (AppImage, DEB, RPM, Flatpak), com estrutura preparada para Windows (MSIX) e macOS (DMG).
-- **Deploy:** Scripts automatizados em `packaging/` para geração de pacotes em diferentes formatos.
+- **Estratégia de Empacotamento:** Uso de ambientes Docker isolados e otimizados por formato (AppImage, DEB, RPM, Flatpak), localizados em `packaging/**`.
+  - Permite builds paralelos.
+  - Gera imagens individualmente menores e mais seguras.
+- **Formatos Suportados:**
+  - **Linux:** AppImage (via `linuxdeploy`), DEB, RPM, Flatpak.
+  - **Outros:** Windows (MSIX) e macOS (DMG) planejados.
+- **Deploy:** Scripts automatizados em `packaging/` orquestram o build dentro dos containers.
