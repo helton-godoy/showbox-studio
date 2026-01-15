@@ -31,14 +31,14 @@ public:
     }
 
     QWidget* createChart(const QString &title, const QString &name) override {
-        // Por enquanto Chart ainda não está na Factory da Core, mantemos fallback ou nullptr
+        // Agora usamos a biblioteca Core para criar o widget real
         QWidget *w = WidgetFactory::create("chart");
-        if (!w) {
-            // Fallback para implementação local enquanto não migramos Chart na Core
-            return nullptr; 
+        
+        // Se retornar nulo, algo está errado na Core, não devemos mascarar.
+        if (w) {
+            w->setObjectName(name);
+            setupStudioWidget(w);
         }
-        w->setObjectName(name);
-        setupStudioWidget(w);
         return w;
     }
 

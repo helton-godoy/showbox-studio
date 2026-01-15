@@ -2,6 +2,7 @@
 #include "../core/IStudioWidgetFactory.h"
 #include <QMimeData>
 #include <QDebug>
+#include <QListWidget>
 
 Canvas::Canvas(IStudioWidgetFactory *factory, QWidget *parent) 
     : QWidget(parent), m_factory(factory)
@@ -22,7 +23,7 @@ void Canvas::addWidget(QWidget *widget)
 
 void Canvas::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasText()) {
+    if (event->mimeData()->hasText() || qobject_cast<QListWidget*>(event->source())) {
         event->acceptProposedAction();
     }
 }
@@ -34,10 +35,20 @@ void Canvas::dragMoveEvent(QDragMoveEvent *event)
 
 void Canvas::dropEvent(QDropEvent *event)
 {
+    QString type;
     const QMimeData *mime = event->mimeData();
-    if (!mime->hasText()) return;
+    
+    if (mime->hasText()) {
+        type = mime->text();
+    } else if (QListWidget *list = qobject_cast<QListWidget*>(event->source())) {
+        QList<QListWidgetItem*> items = list->selectedItems();
+        if (!items.isEmpty()) {
+            type = items.first()->text();
+        }
+    }
 
-    QString type = mime->text();
+    if (type.isEmpty()) return;
+
     QWidget *newWidget = nullptr;
     
     // Gerar um nome único simples
