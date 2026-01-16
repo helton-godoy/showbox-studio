@@ -18,19 +18,13 @@ Implementação da lógica real de criação dos widgets fundamentais.
 - [x] Task: Implement `ShowboxBuilder` for Basic Controls (Button, Label, LineEdit) bff3225
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Core Builder Implementation' (Protocol in workflow.md)
 
-## Phase 3: Complex Widgets and Data Displays
+## Phase 3: Complex Widgets and Data Displays [checkpoint: a2a0f60]
 
 Migração de componentes mais avançados para o novo padrão.
 
 - [x] Task: Implement `ShowboxBuilder` for Item-based Widgets (List, Table, ComboBox) 75e4b89
-  - [ ] Write failing tests for data-heavy widgets
-  - [ ] Implement methods for List, Table and Combo creation and data population
-  - [ ] Verify data binding and display performance
 - [x] Task: Implement `ShowboxBuilder` for Advanced Visuals (Charts, ProgressBars) 5d21852
-  - [ ] Write failing tests for `CustomChartWidget` and ProgressBar integration
-  - [ ] Implement `createChart` and `createProgressBar` using existing Core visuals
-  - [ ] Verify visual fidelity with legacy components
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Complex Widgets' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Complex Widgets' (Protocol in workflow.md)
 
 ## Phase 4: Integration and Validation
 
