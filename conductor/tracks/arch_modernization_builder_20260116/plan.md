@@ -18,7 +18,7 @@ Implementação da lógica real de criação dos widgets fundamentais.
   - [ ] Write failing tests for Window/Layout creation via Builder
   - [ ] Implement `createWindow` and basic layout methods in `ShowboxBuilder`
   - [ ] Verify tests and measure performance
-- [ ] Task: Implement `ShowboxBuilder` for Basic Controls (Button, Label, LineEdit)
+- [x] Task: Implement `ShowboxBuilder` for Basic Controls (Button, Label, LineEdit) bff3225
   - [ ] Write failing tests for basic control instantiation
   - [ ] Implement `createButton`, `createLabel`, and `createLineEdit`
   - [ ] Verify that widgets are "Passive" (no internal shell logic)
