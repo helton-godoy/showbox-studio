@@ -16,7 +16,11 @@
 ## Arquitetura
 
 - **Estrutura Modular:** O `showbox-suite` é organizado em bibliotecas (`libs/showbox-ui`) e executáveis (`showbox` CLI e `showbox-studio`).
-- **Padrões de Design:** Uso intensivo de padrões como Factory (para criação de widgets), Observer (Signals/Slots do Qt) e Singleton (para controladores globais).
+- **Padrões de Design:**
+  - **Builder Pattern:** (`IShowboxBuilder`) para desacoplar a lógica de parsing da criação de widgets, garantindo paridade entre CLI e Studio.
+  - **Passive View:** Widgets em `libs/showbox-ui` devem ser "passivos", focando apenas na exibição e sinais, sem lógica de execução de shell.
+  - **Factory:** (`WidgetFactory`) para instanciação dinâmica de componentes.
+  - **Observer:** Uso nativo de Signals/Slots do Qt para comunicação entre componentes.
 
 ## Distribuição e Empacotamento
 

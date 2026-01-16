@@ -54,3 +54,5 @@ A interface deve ser flexível e adaptável ao ambiente do usuário, suportada p
 
 - **Abstração:** O código C++ deve ser complexo internamente para permitir simplicidade externamente (na interface e no shell script).
 - **Modularidade:** Componentes devem ser independentes. A refatoração do Core para CMake visa garantir que o Studio possa importar _apenas_ o necessário.
+- **Passive View:** Widgets nunca devem executar lógica de shell script internamente. Eles devem emitir sinais Qt puros, delegando a execução para a camada de Controle/Builder.
+- **Padrão de Referência:** Implementações novas devem seguir estritamente o "Golden Sample" (atualmente o PushButton) para garantir consistência arquitetural e facilidade de manutenção por agentes de IA.
