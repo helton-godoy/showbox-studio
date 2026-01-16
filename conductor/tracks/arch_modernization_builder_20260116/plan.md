@@ -10,7 +10,7 @@ Esta fase estabelece as bases da nova arquitetura, definindo como os widgets sã
   - [ ] Write unit tests for config structure defaults and validation
   - [ ] Implement C++ structs for Widget Properties (Base, Button, Label, Window)
   - [ ] Verify coverage and adherence to C++17 standards
-- [ ] Task: Define `IShowboxBuilder` Interface
+- [x] Task: Define `IShowboxBuilder` Interface 4fbb2e4
   - [ ] Create the header `libs/showbox-ui/include/IShowboxBuilder.h` with the comprehensive interface
   - [ ] Ensure all proposed widgets are represented in the interface methods
   - [ ] Document the interface following project guidelines
