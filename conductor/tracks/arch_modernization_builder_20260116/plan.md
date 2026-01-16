@@ -22,7 +22,7 @@ Implementação da lógica real de criação dos widgets fundamentais.
 
 Migração de componentes mais avançados para o novo padrão.
 
-- [ ] Task: Implement `ShowboxBuilder` for Item-based Widgets (List, Table, ComboBox)
+- [x] Task: Implement `ShowboxBuilder` for Item-based Widgets (List, Table, ComboBox) 75e4b89
   - [ ] Write failing tests for data-heavy widgets
   - [ ] Implement methods for List, Table and Combo creation and data population
   - [ ] Verify data binding and display performance
