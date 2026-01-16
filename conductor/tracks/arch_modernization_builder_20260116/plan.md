@@ -2,19 +2,13 @@
 
 Este plano detalha a refatoração profunda do núcleo do Showbox, implementando o padrão Builder e estruturas de dados modernas para suportar o Showbox Studio e um novo protocolo de comunicação.
 
-## Phase 1: Foundation - Interfaces and Data Contracts
+## Phase 1: Foundation - Interfaces and Data Contracts [checkpoint: 74b3c24]
 
 Esta fase estabelece as bases da nova arquitetura, definindo como os widgets são descritos e a interface de construção.
 
 - [x] Task: Define Widget Configuration Structures (Data Contracts) fc35ca1
-  - [ ] Write unit tests for config structure defaults and validation
-  - [ ] Implement C++ structs for Widget Properties (Base, Button, Label, Window)
-  - [ ] Verify coverage and adherence to C++17 standards
 - [x] Task: Define `IShowboxBuilder` Interface 4fbb2e4
-  - [ ] Create the header `libs/showbox-ui/include/IShowboxBuilder.h` with the comprehensive interface
-  - [ ] Ensure all proposed widgets are represented in the interface methods
-  - [ ] Document the interface following project guidelines
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation' (Protocol in workflow.md)
 
 ## Phase 2: Core Builder Implementation - Basic Widgets
 
