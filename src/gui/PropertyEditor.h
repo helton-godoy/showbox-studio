@@ -28,6 +28,7 @@ private:
     bool m_isLoading = false; // Flag para evitar loop de sinal durante o carregamento
 
     void addPropertyRow(const QMetaProperty &prop, const QVariant &value);
+    void addLayoutPropertyRow(QWidget *widget);
 };
 
 #endif // PROPERTYEDITOR_H

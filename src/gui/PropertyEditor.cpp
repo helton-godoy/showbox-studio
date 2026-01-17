@@ -43,8 +43,47 @@ void PropertyEditor::setTargetWidget(QWidget *widget)
         
         addPropertyRow(prop, value);
     }
+
+    // --- Propriedade Virtual: LAYOUT (apenas para containers) ---
+    QString type = widget->property("showbox_type").toString();
+    if (type == "window" || type == "groupbox" || type == "frame" || type == "page") {
+        addLayoutPropertyRow(widget);
+    }
     
     m_isLoading = false;
+}
+
+void PropertyEditor::addLayoutPropertyRow(QWidget *widget)
+{
+    int row = rowCount();
+    insertRow(row);
+    
+    setItem(row, 0, new QTableWidgetItem("layout"));
+    item(row, 0)->setFlags(item(row, 0)->flags() ^ Qt::ItemIsEditable);
+
+    QComboBox *combo = new QComboBox();
+    combo->addItem("Vertical", "vbox");
+    combo->addItem("Horizontal", "hbox");
+
+    // Detectar layout atual
+    if (widget->layout()) {
+        if (qobject_cast<QHBoxLayout*>(widget->layout())) {
+            combo->setCurrentIndex(1);
+        } else {
+            combo->setCurrentIndex(0);
+        }
+    }
+
+    connect(combo, QOverload<int>::of(&QComboBox::currentIndexChanged), [this, widget, combo](int index) {
+        if (m_isLoading) return;
+        QString type = combo->itemData(index).toString();
+        
+        if (m_controller) {
+            m_controller->undoStack()->push(new ChangeLayoutCommand(widget, type));
+        }
+    });
+
+    setCellWidget(row, 1, combo);
 }
 
 void PropertyEditor::addPropertyRow(const QMetaProperty &prop, const QVariant &value)

@@ -34,6 +34,6 @@ Facilitar a criação de layouts complexos.
 
 ## Phase 4: Layout Properties & Refinement
 
-- [ ] Task: Expose Layout Configuration
+- [~] Task: Expose Layout Configuration
   - [ ] Show `layout` property in `PropertyEditor` for containers.
   - [ ] Allow switching between HBox/VBox dynamically.

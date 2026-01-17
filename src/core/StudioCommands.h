@@ -229,4 +229,64 @@ private:
     QWidget *m_container = nullptr;
 };
 
+class ChangeLayoutCommand : public QUndoCommand
+{
+public:
+    ChangeLayoutCommand(QWidget *container, const QString &newType, QUndoCommand *parent = nullptr)
+        : QUndoCommand(parent), m_container(container), m_newType(newType)
+    {
+        if (qobject_cast<QHBoxLayout*>(container->layout())) {
+            m_oldType = "hbox";
+        } else {
+            m_oldType = "vbox";
+        }
+        setText("Change Layout to " + newType);
+    }
+
+    void undo() override {
+        applyLayout(m_oldType);
+    }
+
+    void redo() override {
+        applyLayout(m_newType);
+    }
+
+private:
+    void applyLayout(const QString &type) {
+        if (!m_container) return;
+
+        // 1. Coletar widgets atuais
+        QList<QWidget*> widgets;
+        QLayout *oldLayout = m_container->layout();
+        if (oldLayout) {
+            QLayoutItem *item;
+            while ((item = oldLayout->takeAt(0)) != nullptr) {
+                if (QWidget *w = item->widget()) {
+                    widgets.append(w);
+                }
+                delete item;
+            }
+            delete oldLayout;
+        }
+
+        // 2. Criar novo layout
+        QLayout *newLayout = nullptr;
+        if (type == "hbox") {
+            newLayout = new QHBoxLayout(m_container);
+        } else {
+            newLayout = new QVBoxLayout(m_container);
+        }
+        newLayout->setContentsMargins(5, 5, 5, 5);
+
+        // 3. Readicionar widgets
+        for (QWidget *w : widgets) {
+            newLayout->addWidget(w);
+        }
+    }
+
+    QWidget *m_container;
+    QString m_oldType;
+    QString m_newType;
+};
+
 #endif // STUDIOCOMMANDS_H
