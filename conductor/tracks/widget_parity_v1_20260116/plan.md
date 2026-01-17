@@ -41,7 +41,7 @@ Implementação de controles de entrada de dados mais complexos.
 - [x] Task: Implement `ShowboxBuilder` for Multiline Text [0fa06f2]
   - [x] Write failing tests for TextEdit (Rich Text support)
   - [x] Implement `buildTextEdit`
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Inputs' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Inputs' (Protocol in workflow.md) [checkpoint: a524fcb]
 
 ## Phase 4: Container and Hierarchical Implementation
 
