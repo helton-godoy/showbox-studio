@@ -38,10 +38,11 @@ A evolução do Showbox Suite é guiada por uma relação de estrita interdepend
 
 - **Natureza:** Aplicação Desktop GUI desenvolvida em C++17 e Qt6.
 - **Função:** Atua como um construtor visual de interfaces (IDE) para o Showbox, consumindo a arquitetura modular do Core.
-- **Recursos Chave:**
-  - **Drag-and-Drop:** Construção intuitiva de formulários e dashboards arrastando componentes para um canvas.
-  - **Edição de Propriedades:** Ajuste visual de cores, tamanhos e comportamentos dos widgets.
-  - **Geração de Código:** Compila o layout visual automaticamente em scripts shell prontos para execução pelo Showbox.
+  - **Recursos Chave:**
+    - **Drag-and-Drop:** Construção intuitiva de formulários e dashboards arrastando componentes para um canvas.
+    - **Manipulação Hierárquica:** Reordenação dinâmica de widgets e agrupamento em contêineres (Frames/GroupBoxes) via árvore de objetos e menus contextuais.
+    - **Edição Reversível:** Sistema completo de Undo/Redo para todas as ações de design (adição, deleção, propriedades e estrutura).
+    - **Edição de Propriedades:** Ajuste visual de cores, tamanhos e comportamentos dos widgets.  - **Geração de Código:** Compila o layout visual automaticamente em scripts shell prontos para execução pelo Showbox.
   - **Templates:** Modelos pré-configurados para casos de uso comuns de TI.
 
 ## Objetivos Estratégicos
