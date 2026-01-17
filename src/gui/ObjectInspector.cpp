@@ -3,6 +3,7 @@
 #include "../core/StudioCommands.h"
 #include <QTabWidget>
 #include <QDropEvent>
+#include <QMenu>
 
 ObjectInspector::ObjectInspector(QWidget *parent) : QTreeWidget(parent)
 {
@@ -12,9 +13,71 @@ ObjectInspector::ObjectInspector(QWidget *parent) : QTreeWidget(parent)
     setDragEnabled(true);
     setAcceptDrops(true);
     setDragDropMode(QAbstractItemView::InternalMove);
-    setSelectionMode(QAbstractItemView::SingleSelection);
+    setSelectionMode(QAbstractItemView::ExtendedSelection);
     
+    connect(this, &QTreeWidget::itemSelectionChanged, this, &ObjectInspector::onSelectionChanged);
     connect(this, &QTreeWidget::currentItemChanged, this, &ObjectInspector::onCurrentItemChanged);
+}
+
+void ObjectInspector::onSelectionChanged()
+{
+    if (!m_controller) return;
+
+    // Bloquear sinais para não criar loop infinito se o controller emitir sinais de volta
+    m_controller->blockSignals(true);
+    
+    // Limpar seleção atual no controller (silenciosamente via parâmetro ou limpando antes)
+    // Vamos usar uma abordagem: Coletar todos os selecionados e atualizar o controller.
+    
+    QList<QTreeWidgetItem*> items = selectedItems();
+    QList<QWidget*> widgets;
+    
+    for (QTreeWidgetItem *item : items) {
+        QWidget *w = item->data(0, Qt::UserRole).value<QWidget*>();
+        if (w) widgets.append(w);
+    }
+
+    // Como o controller não tem um "setSelection(list)", vamos desabilitar os destaques manuais 
+    // ou adicionar um método setSelection ao controller.
+    // Vou usar selectWidget(nullptr) para limpar e depois multiSelect em cada um.
+    m_controller->selectWidget(nullptr);
+    for (QWidget *w : widgets) {
+        m_controller->multiSelectWidget(w);
+    }
+
+    m_controller->blockSignals(false);
+}
+
+void ObjectInspector::onCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    if (current) {
+        QWidget *widget = current->data(0, Qt::UserRole).value<QWidget*>();
+        emit itemSelected(widget);
+    }
+}
+
+void ObjectInspector::contextMenuEvent(QContextMenuEvent *event)
+{
+    if (!m_controller) return;
+
+    auto selected = m_controller->selectedWidgets();
+    if (selected.isEmpty()) return;
+
+    QMenu menu(this);
+    QAction *groupFrame = menu.addAction("Group in Frame (HBox)");
+    QAction *groupGroupBox = menu.addAction("Group in GroupBox (VBox)");
+    menu.addSeparator();
+    QAction *deleteAction = menu.addAction("Delete");
+
+    QAction *res = menu.exec(event->globalPos());
+
+    if (res == groupFrame) {
+        emit requestGrouping("Frame");
+    } else if (res == groupGroupBox) {
+        emit requestGrouping("GroupBox");
+    } else if (res == deleteAction) {
+        emit requestDelete();
+    }
 }
 
 void ObjectInspector::dropEvent(QDropEvent *event)
@@ -121,13 +184,5 @@ void ObjectInspector::selectItemForWidget(QWidget *widget)
         blockSignals(true);
         setCurrentItem(m_widgetToItem[widget]);
         blockSignals(false);
-    }
-}
-
-void ObjectInspector::onCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
-{
-    if (current) {
-        QWidget *widget = current->data(0, Qt::UserRole).value<QWidget*>();
-        emit itemSelected(widget);
     }
 }

@@ -5,6 +5,7 @@
 #include <QMimeData>
 #include <QDebug>
 #include <QListWidget>
+#include <QMenu>
 
 Canvas::Canvas(IStudioWidgetFactory *factory, QWidget *parent) 
     : QWidget(parent), m_factory(factory)
@@ -16,6 +17,45 @@ Canvas::Canvas(IStudioWidgetFactory *factory, QWidget *parent)
     setStyleSheet("Canvas { background-color: #f0f0f0; border: 1px solid #ccc; }");
     
     setAcceptDrops(true);
+}
+
+void Canvas::mousePressEvent(QMouseEvent *event)
+{
+    // Clicar no fundo do canvas limpa a seleção
+    if (m_controller) {
+        m_controller->selectWidget(nullptr);
+    }
+    QWidget::mousePressEvent(event);
+}
+
+void Canvas::contextMenuEvent(QContextMenuEvent *event)
+{
+    if (!m_controller) return;
+
+    QMenu menu(this);
+    auto selected = m_controller->selectedWidgets();
+
+    if (!selected.isEmpty()) {
+        QAction *groupFrame = menu.addAction("Group in Frame (HBox)");
+        QAction *groupGroupBox = menu.addAction("Group in GroupBox (VBox)");
+        menu.addSeparator();
+        QAction *deleteAction = menu.addAction("Delete");
+
+        QAction *res = menu.exec(event->globalPos());
+
+        if (res == groupFrame) {
+            emit requestGrouping("Frame");
+        } else if (res == groupGroupBox) {
+            emit requestGrouping("GroupBox");
+        } else if (res == deleteAction) {
+            // Reaproveitar lógica de delete da MainWindow (ou mover para Controller)
+            // Por enquanto, sinalizamos
+            emit requestDelete();
+        }
+    } else {
+        menu.addAction("Canvas context menu (No selection)");
+        menu.exec(event->globalPos());
+    }
 }
 
 void Canvas::addWidget(QWidget *widget)

@@ -22,11 +22,14 @@ void StudioController::manageWidget(QWidget *widget)
 bool StudioController::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
         QWidget *widget = qobject_cast<QWidget*>(watched);
         if (widget) {
-            selectWidget(widget);
-            // Retornamos true para "comer" o evento e impedir que o widget
-            // processe o clique normalmente (ex: botão não afunda)
+            if (mouseEvent->modifiers() & Qt::ControlModifier) {
+                multiSelectWidget(widget);
+            } else {
+                selectWidget(widget);
+            }
             return true; 
         }
     }
@@ -35,20 +38,33 @@ bool StudioController::eventFilter(QObject *watched, QEvent *event)
 
 void StudioController::selectWidget(QWidget *widget)
 {
-    if (m_selectedWidget == widget) return;
+    // Limpar destaques antigos
+    for (QWidget *w : m_selectedWidgets) {
+        if (w) w->setStyleSheet("");
+    }
+    m_selectedWidgets.clear();
 
-    // Remover destaque do antigo
-    if (m_selectedWidget) {
-        m_selectedWidget->setStyleSheet("");
+    if (widget) {
+        m_selectedWidgets.append(widget);
+        widget->setStyleSheet("border: 2px solid #0078d7;");
     }
 
-    m_selectedWidget = widget;
+    emit selectionChanged();
+    emit widgetSelected(widget);
+}
 
-    // Aplicar destaque visual (borda azul)
-    // Nota: Em um editor real usaríamos um Overlay ou RubberBand, 
-    // mas stylesheet é rápido para o protótipo.
-    if (m_selectedWidget) {
-        m_selectedWidget->setStyleSheet("border: 2px solid #0078d7;");
-        emit widgetSelected(m_selectedWidget);
+void StudioController::multiSelectWidget(QWidget *widget)
+{
+    if (!widget) return;
+
+    if (m_selectedWidgets.contains(widget)) {
+        widget->setStyleSheet("");
+        m_selectedWidgets.removeOne(widget);
+    } else {
+        m_selectedWidgets.append(widget);
+        widget->setStyleSheet("border: 2px solid #0078d7;");
     }
+
+    emit selectionChanged();
+    emit widgetSelected(m_selectedWidgets.isEmpty() ? nullptr : m_selectedWidgets.last());
 }

@@ -111,6 +111,7 @@ target_include_directories(tst_UndoRedo PRIVATE
 set(HIERARCHY_TEST_SOURCES
     tst_Hierarchy.cpp
     ../src/gui/ObjectInspector.cpp
+    ../src/core/StudioController.cpp
 )
 
 add_executable(tst_Hierarchy ${HIERARCHY_TEST_SOURCES})

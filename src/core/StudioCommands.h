@@ -4,7 +4,9 @@
 #include <QUndoCommand>
 #include <QWidget>
 #include <QLayout>
+#include <QGroupBox>
 #include "gui/Canvas.h"
+#include "IStudioWidgetFactory.h"
 
 class AddWidgetCommand : public QUndoCommand
 {
@@ -125,6 +127,77 @@ private:
     QWidget *m_newParent;
     int m_oldIndex;
     int m_newIndex;
+};
+
+class GroupWidgetsCommand : public QUndoCommand
+{
+public:
+    struct WidgetInfo {
+        QWidget *widget;
+        QWidget *oldParent;
+        int oldIndex;
+    };
+
+    GroupWidgetsCommand(Canvas *canvas, IStudioWidgetFactory *factory, const QList<QWidget*> &widgets, const QString &containerType, QUndoCommand *parent = nullptr)
+        : QUndoCommand(parent), m_canvas(canvas), m_factory(factory), m_containerType(containerType)
+    {
+        for (QWidget *w : widgets) {
+            WidgetInfo info;
+            info.widget = w;
+            info.oldParent = w->parentWidget();
+            info.oldIndex = (info.oldParent && info.oldParent->layout()) ? info.oldParent->layout()->indexOf(w) : -1;
+            m_widgetsInfo.append(info);
+        }
+        setText("Group in " + containerType);
+    }
+
+    void undo() override {
+        for (const auto &info : m_widgetsInfo) {
+            info.widget->setParent(info.oldParent);
+            if (info.oldParent && info.oldParent->layout()) {
+                if (auto *box = qobject_cast<QBoxLayout*>(info.oldParent->layout())) {
+                    box->insertWidget(info.oldIndex, info.widget);
+                } else {
+                    info.oldParent->layout()->addWidget(info.widget);
+                }
+            }
+            info.widget->show();
+        }
+        m_canvas->removeWidget(m_container);
+    }
+
+    void redo() override {
+        if (!m_container) {
+            m_container = m_factory->createWidget(m_containerType, m_containerType.toLower() + "_group");
+            // Configurar layout padrão se for Frame/GroupBox
+            if (m_containerType == "Frame") {
+                m_container->setProperty("showbox_type", "frame");
+                auto *l = new QHBoxLayout(m_container);
+                l->setContentsMargins(5, 5, 5, 5);
+            } else if (m_containerType == "GroupBox") {
+                m_container->setProperty("showbox_type", "groupbox");
+                auto *l = new QVBoxLayout(m_container);
+                l->setContentsMargins(5, 15, 5, 5);
+            }
+        }
+
+        m_canvas->addWidget(m_container);
+        for (const auto &info : m_widgetsInfo) {
+            if (m_container->layout()) {
+                m_container->layout()->addWidget(info.widget);
+            } else {
+                info.widget->setParent(m_container);
+            }
+            info.widget->show();
+        }
+    }
+
+private:
+    Canvas *m_canvas;
+    IStudioWidgetFactory *m_factory;
+    QList<WidgetInfo> m_widgetsInfo;
+    QString m_containerType;
+    QWidget *m_container = nullptr;
 };
 
 #endif // STUDIOCOMMANDS_H

@@ -28,7 +28,7 @@ Permitir organizar a estrutura via Drag & Drop na árvore.
 
 Facilitar a criação de layouts complexos.
 
-- [ ] Task: Implement Context Menu in Canvas/Tree
+- [~] Task: Implement Context Menu in Canvas/Tree
   - [ ] Actions: "Group in Frame (HBox)", "Group in Frame (VBox)".
 - [ ] Task: Implement Grouping Logic
   - [ ] Create container.

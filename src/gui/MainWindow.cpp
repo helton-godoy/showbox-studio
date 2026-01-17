@@ -65,6 +65,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_canvas, &Canvas::widgetAdded, [this]() {
         m_inspector->updateHierarchy(m_canvas);
     });
+    connect(m_canvas, &Canvas::requestGrouping, this, &MainWindow::onGroupRequested);
+    connect(m_canvas, &Canvas::requestDelete, this, &MainWindow::onDeleteClicked);
+
+    connect(m_inspector, &ObjectInspector::requestGrouping, this, &MainWindow::onGroupRequested);
+    connect(m_inspector, &ObjectInspector::requestDelete, this, &MainWindow::onDeleteClicked);
 
     // Bidirecional: Inspector -> Controller
     connect(m_inspector, &ObjectInspector::itemSelected, m_controller, &StudioController::selectWidget);
@@ -181,6 +186,18 @@ void MainWindow::createSampleWidgets()
         m_canvas->addWidget(w1);
         m_controller->manageWidget(w1);
     }
+}
+
+void MainWindow::onGroupRequested(const QString &containerType)
+{
+    auto selected = m_controller->selectedWidgets();
+    if (selected.isEmpty()) return;
+
+    m_controller->undoStack()->push(new GroupWidgetsCommand(m_canvas, m_factory, selected, containerType));
+    
+    m_controller->selectWidget(nullptr);
+    m_inspector->updateHierarchy(m_canvas);
+    statusBar()->showMessage("Widgets agrupados em " + containerType);
 }
 
 void MainWindow::onRunClicked()

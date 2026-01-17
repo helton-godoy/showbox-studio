@@ -21,11 +21,15 @@ public:
 
 signals:
     void itemSelected(QWidget *widget);
+    void requestGrouping(const QString &containerType);
+    void requestDelete();
 
 protected:
     void dropEvent(QDropEvent *event) override;
+    void contextMenuEvent(QContextMenuEvent *event) override;
 
 private slots:
+    void onSelectionChanged();
     void onCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
 private:

@@ -25,11 +25,15 @@ public:
 signals:
     void widgetAdded(QWidget *widget);
     void widgetSelected(QWidget *widget);
+    void requestGrouping(const QString &containerType);
+    void requestDelete();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void contextMenuEvent(QContextMenuEvent *event) override;
 
 private:
     QVBoxLayout *m_layout;

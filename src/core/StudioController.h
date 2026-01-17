@@ -15,18 +15,21 @@ public:
     // Adiciona um widget ao controle do editor
     void manageWidget(QWidget *widget);
     void selectWidget(QWidget *widget);
+    void multiSelectWidget(QWidget *widget);
 
-    QWidget* selectedWidget() const { return m_selectedWidget; }
+    QWidget* selectedWidget() const { return m_selectedWidgets.isEmpty() ? nullptr : m_selectedWidgets.first(); }
+    QList<QWidget*> selectedWidgets() const { return m_selectedWidgets; }
     QUndoStack* undoStack() const { return m_undoStack; }
 
 signals:
     void widgetSelected(QWidget *widget);
+    void selectionChanged();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
-    QWidget *m_selectedWidget = nullptr;
+    QList<QWidget*> m_selectedWidgets;
     QUndoStack *m_undoStack = nullptr;
 };
 

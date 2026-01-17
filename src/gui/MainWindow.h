@@ -22,6 +22,7 @@ private slots:
     void onSaveClicked();
     void onOpenClicked();
     void onDeleteClicked();
+    void onGroupRequested(const QString &containerType);
 
 private:
     void setupUI();
