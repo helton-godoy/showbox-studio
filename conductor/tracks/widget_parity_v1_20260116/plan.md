@@ -60,7 +60,7 @@ Implementação dos contêineres que permitem organizar outros widgets.
 
 Validação final de que todos os recursos do V1 estão acessíveis via nova arquitetura.
 
-- [ ] Task: Comprehensive Integration Demo
-  - [ ] Create a complex UI PoC using every widget implemented in this track
-  - [ ] Verify visual alignment and behavior in the Dev Container
-- [ ] Task: Conductor - User Manual Verification 'Phase 5: Parity Validation' (Protocol in workflow.md)
+- [x] Task: Comprehensive Integration Demo [225dfa8]
+  - [x] Create a complex UI PoC using every widget implemented in this track
+  - [x] Verify visual alignment and behavior in the Dev Container
+- [x] Task: Conductor - User Manual Verification 'Phase 5: Parity Validation' (Protocol in workflow.md) [checkpoint: 225dfa8]
