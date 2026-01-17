@@ -5,6 +5,9 @@
 #include <QMetaProperty>
 #include <QDebug>
 #include <QComboBox>
+#include <QColorDialog>
+#include <QFontDialog>
+#include <QPushButton>
 
 PropertyEditor::PropertyEditor(QWidget *parent) : QTableWidget(parent)
 {
@@ -130,6 +133,73 @@ void PropertyEditor::addPropertyRow(const QMetaProperty &prop, const QVariant &v
         setCellWidget(row, 1, combo);
         setItem(row, 1, valueItem); // Dummy item por trás
         
+    } else if (value.typeId() == QMetaType::QColor || name.contains("color", Qt::CaseInsensitive) || name.contains("background", Qt::CaseInsensitive)) {
+        QColor color = value.value<QColor>();
+        if (!color.isValid() && value.canConvert<QString>()) {
+            color = QColor(value.toString());
+        }
+
+        QPushButton *btn = new QPushButton();
+        btn->setFlat(true);
+        btn->setAutoFillBackground(true);
+        
+        auto updateBtn = [btn](const QColor &c) {
+            if (c.isValid()) {
+                btn->setText(c.name());
+                btn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid #ccc;")
+                                   .arg(c.name())
+                                   .arg(c.lightness() > 128 ? "black" : "white"));
+            } else {
+                btn->setText("N/A");
+                btn->setStyleSheet("");
+            }
+        };
+        
+        updateBtn(color);
+
+        connect(btn, &QPushButton::clicked, this, [this, name, color, updateBtn]() {
+            if (!m_target) return;
+            QColor current = m_target->property(name.toUtf8().constData()).value<QColor>();
+            QColor newColor = QColorDialog::getColor(current, this, "Escolha uma Cor");
+            
+            if (newColor.isValid()) {
+                if (m_controller) {
+                    m_controller->undoStack()->push(new PropertyChangeCommand(m_target, name, current, newColor));
+                } else {
+                    m_target->setProperty(name.toUtf8().constData(), newColor);
+                }
+                updateBtn(newColor);
+            }
+        });
+
+        setCellWidget(row, 1, btn);
+        setItem(row, 1, valueItem);
+
+    } else if (value.typeId() == QMetaType::QFont || name.contains("font", Qt::CaseInsensitive)) {
+        QFont font = value.value<QFont>();
+        
+        QPushButton *btn = new QPushButton(QString("%1, %2pt").arg(font.family()).arg(font.pointSize()));
+        btn->setFlat(true);
+
+        connect(btn, &QPushButton::clicked, this, [this, name, font, btn]() {
+            if (!m_target) return;
+            bool ok;
+            QFont current = m_target->property(name.toUtf8().constData()).value<QFont>();
+            QFont newFont = QFontDialog::getFont(&ok, current, this, "Escolha uma Fonte");
+            
+            if (ok) {
+                if (m_controller) {
+                    m_controller->undoStack()->push(new PropertyChangeCommand(m_target, name, current, newFont));
+                } else {
+                    m_target->setProperty(name.toUtf8().constData(), newFont);
+                }
+                btn->setText(QString("%1, %2pt").arg(newFont.family()).arg(newFont.pointSize()));
+            }
+        });
+
+        setCellWidget(row, 1, btn);
+        setItem(row, 1, valueItem);
+
     } else if (value.typeId() == QMetaType::Bool) {
         valueItem->setCheckState(value.toBool() ? Qt::Checked : Qt::Unchecked);
         valueItem->setText(value.toBool() ? "true" : "false");
