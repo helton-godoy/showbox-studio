@@ -54,7 +54,7 @@ Implementação dos contêineres que permitem organizar outros widgets.
   - [x] Write failing tests for TabWidget with multiple Pages
   - [x] Implement `buildTabWidget` using the "Block Construction" approach
   - [x] Verify child widget reparenting and layout management
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Containers' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Containers' (Protocol in workflow.md) [checkpoint: b4ff016]
 
 ## Phase 5: Final Parity Validation
 
