@@ -45,7 +45,7 @@ void tst_UndoRedo::testAddDeleteCommands()
     QVERIFY(canvas.children().contains(btn));
 
     // 4. Testar Delete
-    stack->push(new DeleteWidgetCommand(&canvas, btn));
+    stack->push(new DeleteWidgetCommand(&canvas, {btn}));
     QCOMPARE(stack->count(), 2);
     QVERIFY(!canvas.children().contains(btn));
 

@@ -7,6 +7,7 @@
 #include <QGroupBox>
 #include "gui/Canvas.h"
 #include "IStudioWidgetFactory.h"
+#include "StudioController.h"
 
 class AddWidgetCommand : public QUndoCommand
 {
@@ -33,23 +34,48 @@ private:
 class DeleteWidgetCommand : public QUndoCommand
 {
 public:
-    DeleteWidgetCommand(Canvas *canvas, QWidget *widget, QUndoCommand *parent = nullptr)
-        : QUndoCommand(parent), m_canvas(canvas), m_widget(widget)
+    struct WidgetInfo {
+        QWidget *widget;
+        QWidget *parent;
+        int index;
+    };
+
+    DeleteWidgetCommand(Canvas *canvas, QList<QWidget*> widgets, QUndoCommand *parent = nullptr)
+        : QUndoCommand(parent), m_canvas(canvas)
     {
-        setText("Delete " + widget->objectName());
+        for (QWidget *w : widgets) {
+            WidgetInfo info;
+            info.widget = w;
+            info.parent = w->parentWidget();
+            info.index = (info.parent && info.parent->layout()) ? info.parent->layout()->indexOf(w) : -1;
+            m_widgetsInfo.append(info);
+        }
+        setText(QString("Delete %1 items").arg(widgets.size()));
     }
 
     void undo() override {
-        m_canvas->addWidget(m_widget);
+        for (const auto &info : m_widgetsInfo) {
+            m_canvas->addWidget(info.widget);
+            if (info.parent && info.parent->layout()) {
+                if (auto *box = qobject_cast<QBoxLayout*>(info.parent->layout())) {
+                    box->insertWidget(info.index, info.widget);
+                } else {
+                    info.parent->layout()->addWidget(info.widget);
+                }
+            }
+            info.widget->show();
+        }
     }
 
     void redo() override {
-        m_canvas->removeWidget(m_widget);
+        for (const auto &info : m_widgetsInfo) {
+            m_canvas->removeWidget(info.widget);
+        }
     }
 
 private:
     Canvas *m_canvas;
-    QWidget *m_widget;
+    QList<WidgetInfo> m_widgetsInfo;
 };
 
 class PropertyChangeCommand : public QUndoCommand
@@ -138,8 +164,8 @@ public:
         int oldIndex;
     };
 
-    GroupWidgetsCommand(Canvas *canvas, IStudioWidgetFactory *factory, const QList<QWidget*> &widgets, const QString &containerType, QUndoCommand *parent = nullptr)
-        : QUndoCommand(parent), m_canvas(canvas), m_factory(factory), m_containerType(containerType)
+    GroupWidgetsCommand(Canvas *canvas, IStudioWidgetFactory *factory, StudioController *controller, const QList<QWidget*> &widgets, const QString &containerType, QUndoCommand *parent = nullptr)
+        : QUndoCommand(parent), m_canvas(canvas), m_factory(factory), m_controller(controller), m_containerType(containerType)
     {
         for (QWidget *w : widgets) {
             WidgetInfo info;
@@ -164,6 +190,7 @@ public:
             info.widget->show();
         }
         m_canvas->removeWidget(m_container);
+        if (m_controller) m_controller->selectWidget(nullptr);
     }
 
     void redo() override {
@@ -190,11 +217,13 @@ public:
             }
             info.widget->show();
         }
+        if (m_controller) m_controller->selectWidget(m_container);
     }
 
 private:
     Canvas *m_canvas;
     IStudioWidgetFactory *m_factory;
+    StudioController *m_controller;
     QList<WidgetInfo> m_widgetsInfo;
     QString m_containerType;
     QWidget *m_container = nullptr;

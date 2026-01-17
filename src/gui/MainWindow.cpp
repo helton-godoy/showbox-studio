@@ -193,11 +193,25 @@ void MainWindow::onGroupRequested(const QString &containerType)
     auto selected = m_controller->selectedWidgets();
     if (selected.isEmpty()) return;
 
-    m_controller->undoStack()->push(new GroupWidgetsCommand(m_canvas, m_factory, selected, containerType));
+    m_controller->undoStack()->push(new GroupWidgetsCommand(m_canvas, m_factory, m_controller, selected, containerType));
     
-    m_controller->selectWidget(nullptr);
     m_inspector->updateHierarchy(m_canvas);
     statusBar()->showMessage("Widgets agrupados em " + containerType);
+}
+
+void MainWindow::onDeleteClicked()
+{
+    auto selected = m_controller->selectedWidgets();
+    if (selected.isEmpty()) return;
+
+    // Não permitir deletar o Canvas em si ou algo vital
+    if (selected.contains(m_canvas)) return;
+
+    m_controller->undoStack()->push(new DeleteWidgetCommand(m_canvas, selected));
+    
+    m_controller->selectWidget(nullptr); 
+    m_inspector->updateHierarchy(m_canvas); 
+    statusBar()->showMessage(QString("Removidos %1 componentes.").arg(selected.size()));
 }
 
 void MainWindow::onRunClicked()
@@ -286,17 +300,3 @@ void MainWindow::onOpenClicked()
     }
 }
 
-void MainWindow::onDeleteClicked()
-{
-    QWidget *selected = m_controller->selectedWidget();
-    if (!selected) return;
-
-    // Não permitir deletar o Canvas em si ou algo vital
-    if (selected == m_canvas) return;
-
-    m_controller->undoStack()->push(new DeleteWidgetCommand(m_canvas, selected));
-    
-    m_controller->selectWidget(nullptr); 
-    m_inspector->updateHierarchy(m_canvas); 
-    statusBar()->showMessage("Componente removido (Undo disponível).");
-}
