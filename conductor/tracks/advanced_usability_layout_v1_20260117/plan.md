@@ -13,14 +13,14 @@ Implementar a rede de segurança para edição.
 - [x] Task: Implement `PropertyChange` Command [474293f]
   - [ ] Intercept changes in `PropertyEditor` and push commands instead of direct set.
 
-## Phase 2: Hierarchy Reordering (Tree View)
+## Phase 2: Hierarchy Reordering (Tree View) [checkpoint: bf317ed]
 
 Permitir organizar a estrutura via Drag & Drop na árvore.
 
 - [x] Task: Enable Drag & Drop in `ObjectInspector` [22051a4]
   - [ ] Set `dragDropMode` to `InternalMove`.
   - [ ] Override `dropEvent` to handle reparenting logic.
-- [~] Task: Synchronize with Canvas
+- [x] Task: Synchronize with Canvas [bf317ed]
   - [ ] Implement logic to move the actual QWidget when the TreeItem is moved.
   - [ ] Ensure `layout()->insertWidget(index, w)` is used.
 
