@@ -47,13 +47,13 @@ Implementação de controles de entrada de dados mais complexos.
 
 Implementação dos contêineres que permitem organizar outros widgets.
 
-- [ ] Task: Implement `ShowboxBuilder` for Basic Containers
-  - [ ] Write failing tests for GroupBox and Frame (Layout nesting)
-  - [ ] Implement `buildGroupBox` and `buildFrame`
-- [ ] Task: Implement `ShowboxBuilder` for Tabbed Interfaces (Block Construction)
-  - [ ] Write failing tests for TabWidget with multiple Pages
-  - [ ] Implement `buildTabWidget` using the "Block Construction" approach
-  - [ ] Verify child widget reparenting and layout management
+- [x] Task: Implement `ShowboxBuilder` for Basic Containers [01216da]
+  - [x] Write failing tests for GroupBox and Frame (Layout nesting)
+  - [x] Implement `buildGroupBox` and `buildFrame`
+- [x] Task: Implement `ShowboxBuilder` for Tabbed Interfaces (Block Construction) [01216da]
+  - [x] Write failing tests for TabWidget with multiple Pages
+  - [x] Implement `buildTabWidget` using the "Block Construction" approach
+  - [x] Verify child widget reparenting and layout management
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Containers' (Protocol in workflow.md)
 
 ## Phase 5: Final Parity Validation
