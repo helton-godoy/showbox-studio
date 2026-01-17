@@ -24,16 +24,13 @@ Permitir organizar a estrutura via Drag & Drop na árvore.
   - [ ] Implement logic to move the actual QWidget when the TreeItem is moved.
   - [ ] Ensure `layout()->insertWidget(index, w)` is used.
 
-## Phase 3: Contextual Layout Grouping
+## Phase 3: Contextual Layout Grouping [checkpoint: caced0b]
 
 Facilitar a criação de layouts complexos.
 
 - [x] Task: Implement Context Menu in Canvas/Tree [78f1eea]
-  - [ ] Actions: "Group in Frame (HBox)", "Group in Frame (VBox)".
-- [~] Task: Implement Grouping Logic
-  - [ ] Create container.
-  - [ ] Reparent selected widgets to new container.
-  - [ ] Handle Undo/Redo for grouping (complex composite command).
+  - [x] Actions: "Group in Frame (HBox)", "Group in Frame (VBox)".
+- [x] Task: Implement Grouping Logic [caced0b]
 
 ## Phase 4: Layout Properties & Refinement
 
