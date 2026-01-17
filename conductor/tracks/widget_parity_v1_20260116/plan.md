@@ -2,33 +2,33 @@
 
 Este plano detalha a expansão do Showbox Suite para atingir paridade total com os widgets da versão legada, utilizando o padrão Builder e uma abordagem declarativa.
 
-## Phase 1: Expanded Data Contracts
+## Phase 1: Expanded Data Contracts [checkpoint: 19941d1]
 
 Expansão das estruturas de dados em `WidgetConfigs.h` para suportar todos os novos widgets.
 
-- [ ] Task: Define Selection and Input Configuration Structures
-  - [ ] Write unit tests for CheckBox, RadioButton, SpinBox, and Slider configs
-  - [ ] Implement structs: `CheckBoxConfig`, `RadioButtonConfig`, `SpinBoxConfig`, `SliderConfig`
-  - [ ] Verify default values and validation logic
-- [ ] Task: Define Utility and Text Configuration Structures
-  - [ ] Write unit tests for Calendar, TextEdit, and Separator configs
-  - [ ] Implement structs: `CalendarConfig`, `TextEditConfig`, `SeparatorConfig`
-- [ ] Task: Define Container Configuration Structures (Hierarchical)
-  - [ ] Write unit tests for GroupBox, Frame, and TabWidget configs (including nesting)
-  - [ ] Implement structs: `GroupBoxConfig`, `FrameConfig`, `PageConfig`, `TabWidgetConfig`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Expanded Contracts' (Protocol in workflow.md)
+- [x] Task: Define Selection and Input Configuration Structures [19941d1]
+  - [x] Write unit tests for CheckBox, RadioButton, SpinBox, and Slider configs
+  - [x] Implement structs: `CheckBoxConfig`, `RadioButtonConfig`, `SpinBoxConfig`, `SliderConfig`
+  - [x] Verify default values and validation logic
+- [x] Task: Define Utility and Text Configuration Structures [19941d1]
+  - [x] Write unit tests for Calendar, TextEdit, and Separator configs
+  - [x] Implement structs: `CalendarConfig`, `TextEditConfig`, `SeparatorConfig`
+- [x] Task: Define Container Configuration Structures (Hierarchical) [19941d1]
+  - [x] Write unit tests for GroupBox, Frame, and TabWidget configs (including nesting)
+  - [x] Implement structs: `GroupBoxConfig`, `FrameConfig`, `PageConfig`, `TabWidgetConfig`
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Expanded Contracts' (Protocol in workflow.md) [19941d1]
 
 ## Phase 2: Selection and Utility Widget Implementation
 
 Implementação dos controles de seleção e utilitários visuais simples.
 
-- [ ] Task: Implement `ShowboxBuilder` for Selection Widgets
-  - [ ] Write failing tests for CheckBox and RadioButton instantiation
-  - [ ] Implement `buildCheckBox` and `buildRadioButton`
-  - [ ] Verify signal/slot compatibility for passive view
-- [ ] Task: Implement `ShowboxBuilder` for Utility Widgets
-  - [ ] Write failing tests for Separator and Calendar
-  - [ ] Implement `buildSeparator` and `buildCalendar`
+- [x] Task: Implement `ShowboxBuilder` for Selection Widgets [9207547]
+  - [x] Write failing tests for CheckBox and RadioButton instantiation
+  - [x] Implement `buildCheckBox` and `buildRadioButton`
+  - [x] Verify signal/slot compatibility for passive view
+- [x] Task: Implement `ShowboxBuilder` for Utility Widgets [9207547]
+  - [x] Write failing tests for Separator and Calendar
+  - [x] Implement `buildSeparator` and `buildCalendar`
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Selection and Utilities' (Protocol in workflow.md)
 
 ## Phase 3: Numerical and Text Input Implementation
