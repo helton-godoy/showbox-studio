@@ -17,7 +17,7 @@ Implementar a rede de segurança para edição.
 
 Permitir organizar a estrutura via Drag & Drop na árvore.
 
-- [ ] Task: Enable Drag & Drop in `ObjectInspector`
+- [~] Task: Enable Drag & Drop in `ObjectInspector`
   - [ ] Set `dragDropMode` to `InternalMove`.
   - [ ] Override `dropEvent` to handle reparenting logic.
 - [ ] Task: Synchronize with Canvas

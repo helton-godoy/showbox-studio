@@ -3,6 +3,7 @@
 
 #include <QUndoCommand>
 #include <QWidget>
+#include <QLayout>
 #include "gui/Canvas.h"
 
 class AddWidgetCommand : public QUndoCommand
@@ -71,6 +72,59 @@ private:
     QString m_propertyName;
     QVariant m_oldValue;
     QVariant m_newValue;
+};
+
+class MoveWidgetCommand : public QUndoCommand
+{
+public:
+    MoveWidgetCommand(QWidget *widget, QWidget *newParent, int newIndex = -1, QUndoCommand *parent = nullptr)
+        : QUndoCommand(parent), m_widget(widget), m_newParent(newParent), m_newIndex(newIndex)
+    {
+        m_oldParent = widget->parentWidget();
+        
+        // Tentar obter o index antigo se estiver em um layout
+        if (m_oldParent && m_oldParent->layout()) {
+            m_oldIndex = m_oldParent->layout()->indexOf(widget);
+        } else {
+            m_oldIndex = -1;
+        }
+
+        setText(QString("Move %1 to %2").arg(widget->objectName(), newParent ? newParent->objectName() : "Root"));
+    }
+
+    void undo() override {
+        applyMove(m_oldParent, m_oldIndex);
+    }
+
+    void redo() override {
+        applyMove(m_newParent, m_newIndex);
+    }
+
+private:
+    void applyMove(QWidget *parent, int index) {
+        if (!parent || !m_widget) return;
+        
+        m_widget->setParent(parent);
+        if (parent->layout()) {
+            if (index >= 0) {
+                // Se for um QBoxLayout, podemos inserir
+                if (auto *box = qobject_cast<QBoxLayout*>(parent->layout())) {
+                    box->insertWidget(index, m_widget);
+                } else {
+                    parent->layout()->addWidget(m_widget);
+                }
+            } else {
+                parent->layout()->addWidget(m_widget);
+            }
+        }
+        m_widget->show();
+    }
+
+    QWidget *m_widget;
+    QWidget *m_oldParent;
+    QWidget *m_newParent;
+    int m_oldIndex;
+    int m_newIndex;
 };
 
 #endif // STUDIOCOMMANDS_H

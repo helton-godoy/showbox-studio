@@ -107,4 +107,25 @@ target_include_directories(tst_UndoRedo PRIVATE
     "${SHOWBOX_UI_INCLUDE}"
 )
 
-add_test(NAME tst_UndoRedo COMMAND tst_UndoRedo)
+# --- Teste de Hierarquia (Novo) ---
+set(HIERARCHY_TEST_SOURCES
+    tst_Hierarchy.cpp
+    ../src/gui/ObjectInspector.cpp
+)
+
+add_executable(tst_Hierarchy ${HIERARCHY_TEST_SOURCES})
+
+target_link_libraries(tst_Hierarchy PRIVATE 
+    Qt6::Test 
+    Qt6::Widgets
+    Qt6::Charts
+    Qt6::Svg
+    showbox-ui
+)
+
+target_include_directories(tst_Hierarchy PRIVATE 
+    "${CMAKE_CURRENT_SOURCE_DIR}/../src"
+    "${SHOWBOX_UI_INCLUDE}"
+)
+
+add_test(NAME tst_Hierarchy COMMAND tst_Hierarchy)

@@ -1,12 +1,61 @@
 #include "ObjectInspector.h"
+#include "../core/StudioController.h"
+#include "../core/StudioCommands.h"
 #include <QTabWidget>
+#include <QDropEvent>
 
 ObjectInspector::ObjectInspector(QWidget *parent) : QTreeWidget(parent)
 {
     setHeaderLabel("Hierarquia de Objetos");
     setColumnCount(1);
     
+    setDragEnabled(true);
+    setAcceptDrops(true);
+    setDragDropMode(QAbstractItemView::InternalMove);
+    setSelectionMode(QAbstractItemView::SingleSelection);
+    
     connect(this, &QTreeWidget::currentItemChanged, this, &ObjectInspector::onCurrentItemChanged);
+}
+
+void ObjectInspector::dropEvent(QDropEvent *event)
+{
+    QTreeWidgetItem *item = currentItem();
+    if (!item) {
+        QTreeWidget::dropEvent(event);
+        return;
+    }
+
+    QWidget *widget = item->data(0, Qt::UserRole).value<QWidget*>();
+    
+    // Executar o drop visual do Qt
+    QTreeWidget::dropEvent(event);
+
+    // Identificar o novo pai na árvore
+    QTreeWidgetItem *newParentItem = item->parent();
+    QWidget *newParentWidget = nullptr;
+
+    if (newParentItem) {
+        newParentWidget = newParentItem->data(0, Qt::UserRole).value<QWidget*>();
+    }
+
+    if (widget && newParentWidget) {
+        int index = -1;
+        if (newParentItem) {
+            index = newParentItem->indexOfChild(item);
+        } else {
+            index = invisibleRootItem()->indexOfChild(item);
+        }
+
+        if (m_controller) {
+            m_controller->undoStack()->push(new MoveWidgetCommand(widget, newParentWidget, index));
+        } else {
+            widget->setParent(newParentWidget);
+            if (newParentWidget->layout()) {
+                newParentWidget->layout()->addWidget(widget);
+            }
+            widget->show();
+        }
+    }
 }
 
 void ObjectInspector::updateHierarchy(QWidget *root)

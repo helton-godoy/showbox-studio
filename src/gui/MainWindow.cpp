@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupUI();
     m_canvas->setController(m_controller);
     m_propEditor->setController(m_controller);
+    m_inspector->setController(m_controller);
     createSampleWidgets();
 
     // Sincronizar UI com Undo/Redo
