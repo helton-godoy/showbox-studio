@@ -29,6 +29,8 @@ private:
 
     void addPropertyRow(const QMetaProperty &prop, const QVariant &value);
     void addLayoutPropertyRow(QWidget *widget);
+    void addStylePropertyRows(QWidget *widget);
+    void addColorButtonForRow(int row, const QString &name, const QVariant &value);
 };
 
 #endif // PROPERTYEDITOR_H

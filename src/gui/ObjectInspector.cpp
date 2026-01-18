@@ -4,6 +4,8 @@
 #include <QTabWidget>
 #include <QDropEvent>
 #include <QMenu>
+#include <QElapsedTimer>
+#include <QDebug>
 
 ObjectInspector::ObjectInspector(QWidget *parent) : QTreeWidget(parent)
 {
@@ -142,8 +144,54 @@ void ObjectInspector::dropEvent(QDropEvent *event)
     }
 }
 
+void ObjectInspector::onWidgetAdded(QWidget *widget)
+{
+    if (!widget) return;
+    
+    QWidget *parentWidget = widget->parentWidget();
+    QTreeWidgetItem *parentItem = invisibleRootItem();
+
+    if (parentWidget && m_widgetToItem.contains(parentWidget)) {
+        parentItem = m_widgetToItem[parentWidget];
+    }
+
+    addWidgetToTree(widget, parentItem);
+    
+    // Garantir que o novo item seja visível
+    if (parentItem != invisibleRootItem()) {
+        parentItem->setExpanded(true);
+    }
+}
+
+void ObjectInspector::onWidgetRemoved(QWidget *widget)
+{
+    if (!widget || !m_widgetToItem.contains(widget)) return;
+
+    QTreeWidgetItem *item = m_widgetToItem[widget];
+    
+    // Remover recursivamente do mapa para evitar dangling pointers
+    QList<QWidget*> toRemove;
+    QMapIterator<QWidget*, QTreeWidgetItem*> i(m_widgetToItem);
+    while (i.hasNext()) {
+        i.next();
+        // Se o item for o próprio ou descendente (na árvore do Qt)
+        if (i.key() == widget || widget->isAncestorOf(i.key())) {
+            toRemove.append(i.key());
+        }
+    }
+
+    for (QWidget *w : toRemove) {
+        m_widgetToItem.remove(w);
+    }
+
+    delete item;
+}
+
 void ObjectInspector::updateHierarchy(QWidget *root)
 {
+    QElapsedTimer timer;
+    timer.start();
+
     clear();
     m_widgetToItem.clear();
     
@@ -151,6 +199,8 @@ void ObjectInspector::updateHierarchy(QWidget *root)
     
     addWidgetToTree(root, invisibleRootItem());
     expandAll();
+
+    qDebug() << "[PERF] ObjectInspector::updateHierarchy levou" << timer.elapsed() << "ms para" << m_widgetToItem.size() << "widgets.";
 }
 
 void ObjectInspector::addWidgetToTree(QWidget *widget, QTreeWidgetItem *parentItem)

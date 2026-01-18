@@ -16,6 +16,10 @@ public:
     // Atualiza a árvore baseada no widget raiz do canvas
     void updateHierarchy(QWidget *root);
 
+    // Métodos incrementais para evitar reconstrução total
+    void onWidgetAdded(QWidget *widget);
+    void onWidgetRemoved(QWidget *widget);
+
     // Sincroniza a seleção quando clicado no canvas
     void selectItemForWidget(QWidget *widget);
 

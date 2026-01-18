@@ -4,6 +4,16 @@
 #include "IStudioWidgetFactory.h"
 #include <ShowboxBuilder.h>
 #include <WidgetConfigs.h>
+#include <QTableWidget>
+#include <QComboBox>
+#include <QListWidget>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QGridLayout>
+#include <QFormLayout>
+#include <QScrollArea>
 
 class StudioWidgetFactory : public IStudioWidgetFactory {
 public:
@@ -94,12 +104,123 @@ public:
             Showbox::Models::SeparatorConfig cfg;
             cfg.name = name;
             w = builder.buildSeparator(cfg);
+        } else if (t == "scrollarea") {
+            // ScrollArea container
+            auto *scroll = new QScrollArea();
+            scroll->setObjectName(name);
+            scroll->setWidgetResizable(true);
+            auto *content = new QWidget();
+            content->setLayout(new QVBoxLayout(content));
+            scroll->setWidget(content);
+            w = scroll;
+        } else if (t == "hboxlayout" || t == "vboxlayout" || t == "gridlayout" || t == "formlayout") {
+            // Layout containers - create a widget with the specified layout
+            auto *container = new QWidget();
+            container->setObjectName(name);
+            container->setMinimumSize(100, 50);
+            
+            QLayout *layout = nullptr;
+            if (t == "hboxlayout") {
+                layout = new QHBoxLayout(container);
+            } else if (t == "vboxlayout") {
+                layout = new QVBoxLayout(container);
+            } else if (t == "gridlayout") {
+                layout = new QGridLayout(container);
+            } else if (t == "formlayout") {
+                layout = new QFormLayout(container);
+            }
+            
+            if (layout) {
+                layout->setContentsMargins(5, 5, 5, 5);
+                layout->setSpacing(5);
+            }
+            
+            // Visual indicator for layout type
+            container->setStyleSheet("QWidget { border: 1px dashed #666; }");
+            w = container;
+        } else if (t == "horizontalspacer" || t == "verticalspacer") {
+            // Spacers - create a widget that represents a spacer
+            auto *spacer = new QWidget();
+            spacer->setObjectName(name);
+            
+            if (t == "horizontalspacer") {
+                spacer->setMinimumSize(40, 20);
+                spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+                spacer->setStyleSheet("background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #333, stop:0.5 #555, stop:1 #333); border-radius: 2px;");
+            } else {
+                spacer->setMinimumSize(20, 40);
+                spacer->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+                spacer->setStyleSheet("background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #333, stop:0.5 #555, stop:1 #333); border-radius: 2px;");
+            }
+            w = spacer;
         }
 
         if (w) {
             setupStudioWidget(w, t);
         }
         return w;
+    }
+
+    void serializeWidget(QWidget *widget, QJsonObject &json) override {
+        if (!widget) return;
+        QString t = widget->property("showbox_type").toString();
+        
+        if (t == "table") {
+            if (auto *table = qobject_cast<QTableWidget*>(widget)) {
+                QJsonArray headers;
+                for(int i=0; i<table->columnCount(); ++i) {
+                     headers.append(table->horizontalHeaderItem(i)->text());
+                }
+                json["headers"] = headers;
+                
+                // TODO: Rows serialization if needed
+            }
+        } else if (t == "combobox") {
+            if (auto *combo = qobject_cast<QComboBox*>(widget)) {
+                QJsonArray items;
+                for(int i=0; i<combo->count(); ++i) items.append(combo->itemText(i));
+                json["items"] = items;
+            }
+        } else if (t == "listbox") {
+            if (auto *list = qobject_cast<QListWidget*>(widget)) {
+                QJsonArray items;
+                for(int i=0; i<list->count(); ++i) items.append(list->item(i)->text());
+                json["items"] = items;
+            }
+        }
+    }
+
+    void deserializeWidget(QWidget *widget, const QJsonObject &json) override {
+        if (!widget) return;
+        QString t = widget->property("showbox_type").toString();
+
+        if (t == "table") {
+           if (auto *table = qobject_cast<QTableWidget*>(widget)) {
+               if (json.contains("headers")) {
+                   QJsonArray arr = json["headers"].toArray();
+                   table->setColumnCount(arr.size());
+                   QStringList headers;
+                   for(const auto &v : arr) headers << v.toString();
+                   table->setHorizontalHeaderLabels(headers);
+               }
+           }
+        } else if (t == "combobox") {
+            if (auto *combo = qobject_cast<QComboBox*>(widget)) {
+                if (json.contains("items")) {
+                    combo->clear();
+                    QJsonArray arr = json["items"].toArray();
+                    for(const auto &v : arr) combo->addItem(v.toString());
+                }
+            }
+        } else if (t == "listbox") {
+            if (auto *list = qobject_cast<QListWidget*>(widget)) {
+                 if (json.contains("items")) {
+                    list->clear();
+                    QJsonArray arr = json["items"].toArray();
+                    for(const auto &v : arr) list->addItem(v.toString());
+                }
+            }
+        }
     }
 
 private:

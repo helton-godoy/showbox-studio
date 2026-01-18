@@ -52,8 +52,90 @@ void PropertyEditor::setTargetWidget(QWidget *widget)
     if (type == "window" || type == "groupbox" || type == "frame" || type == "page") {
         addLayoutPropertyRow(widget);
     }
+
+    // --- Propriedades Virtuais: ESTILO (Cores) ---
+    addStylePropertyRows(widget);
     
     m_isLoading = false;
+}
+
+void PropertyEditor::addStylePropertyRows(QWidget *widget)
+{
+    // Adicionar Background Color
+    int rowBg = rowCount();
+    insertRow(rowBg);
+    setItem(rowBg, 0, new QTableWidgetItem("background-color"));
+    item(rowBg, 0)->setFlags(item(rowBg, 0)->flags() ^ Qt::ItemIsEditable);
+    
+    QVariant bgValue = widget->property("background-color");
+    if (!bgValue.isValid()) bgValue = widget->palette().color(QPalette::Window);
+    
+    addColorButtonForRow(rowBg, "background-color", bgValue);
+
+    // Adicionar Text Color
+    int rowFg = rowCount();
+    insertRow(rowFg);
+    setItem(rowFg, 0, new QTableWidgetItem("text-color"));
+    item(rowFg, 0)->setFlags(item(rowFg, 0)->flags() ^ Qt::ItemIsEditable);
+
+    QVariant fgValue = widget->property("text-color");
+    if (!fgValue.isValid()) fgValue = widget->palette().color(QPalette::WindowText);
+
+    addColorButtonForRow(rowFg, "text-color", fgValue);
+}
+
+void PropertyEditor::addColorButtonForRow(int row, const QString &name, const QVariant &value)
+{
+    QTableWidgetItem *valueItem = new QTableWidgetItem();
+    valueItem->setData(Qt::UserRole, name);
+    
+    QColor color = value.value<QColor>();
+    if (!color.isValid() && value.canConvert<QString>()) {
+        color = QColor(value.toString());
+    }
+
+    QPushButton *btn = new QPushButton();
+    btn->setFlat(true);
+    btn->setAutoFillBackground(true);
+    
+    auto updateBtn = [btn](const QColor &c) {
+        if (c.isValid()) {
+            btn->setText(c.name());
+            btn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid #ccc; font-weight: bold;")
+                                .arg(c.name())
+                                .arg(c.lightness() > 128 ? "black" : "white"));
+        }
+    };
+    
+    updateBtn(color);
+
+    connect(btn, &QPushButton::clicked, this, [this, name, updateBtn]() {
+        if (!m_target) return;
+        QColor current = m_target->property(name.toUtf8().constData()).value<QColor>();
+        if (!current.isValid()) current = Qt::white;
+
+        QColor newColor = QColorDialog::getColor(current, this, "Escolha uma Cor");
+        
+        if (newColor.isValid()) {
+            if (m_controller) {
+                m_controller->undoStack()->push(new PropertyChangeCommand(m_target, name, current, newColor));
+            } else {
+                m_target->setProperty(name.toUtf8().constData(), newColor);
+            }
+            updateBtn(newColor);
+            
+            // Aplicar estilo visualmente ao widget (Simulação rápida via StyleSheet)
+            QString style = m_target->styleSheet();
+            if (name == "background-color") {
+                m_target->setStyleSheet(style + QString("; background-color: %1;").arg(newColor.name()));
+            } else if (name == "text-color") {
+                m_target->setStyleSheet(style + QString("; color: %1;").arg(newColor.name()));
+            }
+        }
+    });
+
+    setCellWidget(row, 1, btn);
+    setItem(row, 1, valueItem);
 }
 
 void PropertyEditor::addLayoutPropertyRow(QWidget *widget)
@@ -134,46 +216,7 @@ void PropertyEditor::addPropertyRow(const QMetaProperty &prop, const QVariant &v
         setItem(row, 1, valueItem); // Dummy item por trás
         
     } else if (value.typeId() == QMetaType::QColor || name.contains("color", Qt::CaseInsensitive) || name.contains("background", Qt::CaseInsensitive)) {
-        QColor color = value.value<QColor>();
-        if (!color.isValid() && value.canConvert<QString>()) {
-            color = QColor(value.toString());
-        }
-
-        QPushButton *btn = new QPushButton();
-        btn->setFlat(true);
-        btn->setAutoFillBackground(true);
-        
-        auto updateBtn = [btn](const QColor &c) {
-            if (c.isValid()) {
-                btn->setText(c.name());
-                btn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid #ccc;")
-                                   .arg(c.name())
-                                   .arg(c.lightness() > 128 ? "black" : "white"));
-            } else {
-                btn->setText("N/A");
-                btn->setStyleSheet("");
-            }
-        };
-        
-        updateBtn(color);
-
-        connect(btn, &QPushButton::clicked, this, [this, name, color, updateBtn]() {
-            if (!m_target) return;
-            QColor current = m_target->property(name.toUtf8().constData()).value<QColor>();
-            QColor newColor = QColorDialog::getColor(current, this, "Escolha uma Cor");
-            
-            if (newColor.isValid()) {
-                if (m_controller) {
-                    m_controller->undoStack()->push(new PropertyChangeCommand(m_target, name, current, newColor));
-                } else {
-                    m_target->setProperty(name.toUtf8().constData(), newColor);
-                }
-                updateBtn(newColor);
-            }
-        });
-
-        setCellWidget(row, 1, btn);
-        setItem(row, 1, valueItem);
+        addColorButtonForRow(row, name, value);
 
     } else if (value.typeId() == QMetaType::QFont || name.contains("font", Qt::CaseInsensitive)) {
         QFont font = value.value<QFont>();

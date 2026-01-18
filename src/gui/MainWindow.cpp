@@ -2,10 +2,12 @@
 #include "Canvas.h"
 #include "ObjectInspector.h"
 #include "PropertyEditor.h"
+#include "ActionEditor.h"
 #include "core/StudioWidgetFactory.h"
 #include "core/StudioController.h"
 #include "core/StudioCommands.h"
 #include "core/ScriptGenerator.h"
+#include "core/PreviewManager.h"
 #include "core/ProjectSerializer.h"
 #include <QStatusBar>
 #include <QMenuBar>
@@ -17,16 +19,30 @@
 #include <QHBoxLayout>
 #include <QDockWidget>
 #include <QListWidget>
-#include <QToolBox>
+#include <QTextEdit>
+#include <QSettings>
+#include <QActionGroup>
+#include <QTabWidget>
+#include "toolbox/ToolboxClassic.h"
+#include "toolbox/ToolboxTree.h"
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
+    , m_dockToolbox(nullptr)
+    , m_toolbox(nullptr)
+    , m_toolboxStyle(0)
 {
     setWindowTitle("Showbox Studio");
+    
+    // Carregar preferência de estilo do toolbox
+    QSettings settings("Showbox", "ShowboxStudio");
+    m_toolboxStyle = settings.value("toolboxStyle", 0).toInt();
     resize(1200, 800);
     
     m_factory = new StudioWidgetFactory();
     m_controller = new StudioController(this);
+    m_previewManager = new PreviewManager(this);
     
     setupUI();
     m_canvas->setController(m_controller);
@@ -55,16 +71,16 @@ MainWindow::MainWindow(QWidget *parent)
     editMenu->addAction(m_controller->undoStack()->createUndoAction(this));
     editMenu->addAction(m_controller->undoStack()->createRedoAction(this));
     
-    // Sincronizar seleção: Canvas -> Inspector & Property Editor
+    // Sincronizar seleção: Canvas -> Inspector & Property Editor & Action Editor
     connect(m_controller, &StudioController::widgetSelected, m_inspector, &ObjectInspector::selectItemForWidget);
     connect(m_controller, &StudioController::widgetSelected, m_propEditor, &PropertyEditor::setTargetWidget);
+    connect(m_controller, &StudioController::widgetSelected, m_actionEditor, &ActionEditor::setTargetWidget);
     
     // Conectar novos widgets do Canvas ao Controller e atualizar árvore
     connect(m_canvas, &Canvas::widgetAdded, m_controller, &StudioController::manageWidget);
     connect(m_canvas, &Canvas::widgetSelected, m_controller, &StudioController::selectWidget); // Novo
-    connect(m_canvas, &Canvas::widgetAdded, [this]() {
-        m_inspector->updateHierarchy(m_canvas);
-    });
+    connect(m_canvas, &Canvas::widgetAdded, m_inspector, &ObjectInspector::onWidgetAdded);
+    
     connect(m_canvas, &Canvas::requestGrouping, this, &MainWindow::onGroupRequested);
     connect(m_canvas, &Canvas::requestDelete, this, &MainWindow::onDeleteClicked);
 
@@ -133,48 +149,79 @@ void MainWindow::setupUI()
     dockInspector->setWidget(m_inspector);
     addDockWidget(Qt::LeftDockWidgetArea, dockInspector);
 
-    QDockWidget *dockToolbox = new QDockWidget("Toolbox", this);
-    QToolBox *toolBoxWidget = new QToolBox(dockToolbox);
+    // Criar Toolbox com estilo salvo
+    m_dockToolbox = new QDockWidget("Toolbox", this);
+    createToolbox(m_toolboxStyle);
+    addDockWidget(Qt::LeftDockWidgetArea, m_dockToolbox);
     
-    // Helper lambda para criar listas de categorias
-    auto createCategory = [&](const QStringList &items) -> QListWidget* {
-        QListWidget *list = new QListWidget();
-        list->setDragEnabled(true);
-        list->setDragDropMode(QAbstractItemView::DragOnly);
-        list->addItems(items);
-        return list;
-    };
+    tabifyDockWidget(dockInspector, m_dockToolbox);
 
-    // 1. Controles Básicos
-    toolBoxWidget->addItem(createCategory({
-        "Label", "PushButton", "CheckBox", "RadioButton", "Separator"
-    }), "Básico");
-
-    // 2. Entrada de Dados
-    toolBoxWidget->addItem(createCategory({
-        "LineEdit", "TextEdit", "SpinBox", "Slider", "ComboBox", "Calendar"
-    }), "Entrada");
-
-    // 3. Dados & Visualização
-    toolBoxWidget->addItem(createCategory({
-        "ListBox", "Table", "ProgressBar", "Chart"
-    }), "Dados");
-
-    // 4. Containers
-    toolBoxWidget->addItem(createCategory({
-        "GroupBox", "Frame", "TabWidget"
-    }), "Containers");
-
-    dockToolbox->setWidget(toolBoxWidget);
-    addDockWidget(Qt::LeftDockWidgetArea, dockToolbox);
+    // Menu View para alternar estilo do Toolbox
+    QMenu *viewMenu = menuBar()->addMenu("&View");
+    QMenu *toolboxStyleMenu = viewMenu->addMenu("Toolbox Style");
     
-    tabifyDockWidget(dockInspector, dockToolbox);
+    QActionGroup *styleGroup = new QActionGroup(this);
+    styleGroup->setExclusive(true);
+    
+    QAction *classicAction = toolboxStyleMenu->addAction("Classic (Uma aba por vez)");
+    classicAction->setCheckable(true);
+    classicAction->setChecked(m_toolboxStyle == 0);
+    classicAction->setData(0);
+    styleGroup->addAction(classicAction);
+    
+    QAction *treeAction = toolboxStyleMenu->addAction("Tree (Múltiplas seções)");
+    treeAction->setCheckable(true);
+    treeAction->setChecked(m_toolboxStyle == 1);
+    treeAction->setData(1);
+    styleGroup->addAction(treeAction);
+    
+    connect(styleGroup, &QActionGroup::triggered, this, [this](QAction *action) {
+        onToolboxStyleChanged(action->data().toInt());
+    });
 
-    // Right Dock: PROPERTIES
+    // Right Dock: PROPERTIES & ACTIONS (Tabbed)
     QDockWidget *dockProps = new QDockWidget("Propriedades", this);
-    m_propEditor = new PropertyEditor(dockProps);
-    dockProps->setWidget(m_propEditor);
+    QTabWidget *propsTabWidget = new QTabWidget(dockProps);
+    
+    m_propEditor = new PropertyEditor(propsTabWidget);
+    m_actionEditor = new ActionEditor(propsTabWidget);
+    m_actionEditor->setController(m_controller);
+    
+    propsTabWidget->addTab(m_propEditor, "Propriedades");
+    propsTabWidget->addTab(m_actionEditor, "Ações");
+    
+    dockProps->setWidget(propsTabWidget);
     addDockWidget(Qt::RightDockWidgetArea, dockProps);
+
+    // Bottom Dock: PREVIEW LOG
+    QDockWidget *dockPreview = new QDockWidget("Live Preview Output", this);
+    dockPreview->setObjectName("PreviewDock"); // For saving state later
+    m_previewLog = new QTextEdit(dockPreview);
+    m_previewLog->setReadOnly(true);
+    m_previewLog->setStyleSheet("background-color: #1e1e1e; color: #00ff00; font-family: Monospace;");
+    dockPreview->setWidget(m_previewLog);
+    addDockWidget(Qt::BottomDockWidgetArea, dockPreview);
+
+    // Connect Preview Signals
+    connect(m_previewManager, &PreviewManager::previewOutput, this, [this](const QString &out){
+        m_previewLog->append(out);
+        // Auto scroll
+        m_previewLog->moveCursor(QTextCursor::End);
+    });
+    connect(m_previewManager, &PreviewManager::previewError, this, [this](const QString &err){
+        m_previewLog->append("<span style='color:red'>" + err + "</span>");
+    });
+    connect(m_previewManager, &PreviewManager::previewFinished, this, [this](int code){
+        QString status;
+        if (code == 0) {
+            status = "<span style='color:lime'>Finished Successfully</span>";
+        } else if (code == 139) {
+            status = "<span style='color:red; font-weight:bold'>PROCESS CRASHED (Segfault)</span>";
+        } else {
+            status = QString("<span style='color:red'>Failed with exit code %1</span>").arg(code);
+        }
+        m_previewLog->append(QString("<br/><b>%1</b><hr/>").arg(status));
+    });
 }
 
 void MainWindow::createSampleWidgets()
@@ -209,8 +256,11 @@ void MainWindow::onDeleteClicked()
 
     m_controller->undoStack()->push(new DeleteWidgetCommand(m_canvas, selected));
     
+    for (QWidget *w : selected) {
+        m_inspector->onWidgetRemoved(w);
+    }
+
     m_controller->selectWidget(nullptr); 
-    m_inspector->updateHierarchy(m_canvas); 
     statusBar()->showMessage(QString("Removidos %1 componentes.").arg(selected.size()));
 }
 
@@ -221,45 +271,21 @@ void MainWindow::onRunClicked()
     
     if (script.isEmpty()) {
         statusBar()->showMessage("Erro: Nada para exportar.");
+        m_previewLog->append("<span style='color:orange'>Warning: Nothing to export.</span>");
         return;
     }
 
-    // Salvar temporário
-    QString tempPath = "/tmp/studio_preview.sbx";
-    QFile file(tempPath);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-        out << script;
-        file.close();
-    } else {
-        statusBar()->showMessage("Erro ao salvar arquivo temporário.");
-        return;
-    }
-
-    statusBar()->showMessage("Executando Preview...");
-
-    // Executar Showbox
-    // Usamos o caminho relativo baseado na estrutura do workspace
-    QString binPath = "../showbox/build/bin/poc_modern_cli";
+    statusBar()->showMessage("Iniciando Preview...");
+    m_previewLog->clear();
+    m_previewLog->append(QString("<b>Starting Preview...</b> [%1]").arg(QTime::currentTime().toString()));
+    m_previewLog->append("<i>Generating script...</i>");
     
-    // QProcess para rodar o binário lendo o script
-    QProcess *process = new QProcess(this);
-    process->setProgram(binPath);
-    // Passar argumento para manter aberto e input via arquivo (stdin)
-    process->setArguments({"--keep-open"});
-    process->setStandardInputFile(tempPath);
+    // Ensure dock is visible
+    QDockWidget *dock = findChild<QDockWidget*>("PreviewDock");
+    if(dock) dock->show();
 
-    connect(process, &QProcess::finished, [this, process](int exitCode) {
-        if (exitCode == 0) {
-            statusBar()->showMessage("Preview finalizado com sucesso.");
-        } else {
-            statusBar()->showMessage(QString("Erro no Preview (Exit code: %1)").arg(exitCode));
-            qDebug() << "Showbox Error Output:" << process->readAllStandardError();
-        }
-        process->deleteLater();
-    });
-
-    process->start();
+    // Run via Manager
+    m_previewManager->runPreview(script);
 }
 
 void MainWindow::onSaveClicked()
@@ -270,7 +296,7 @@ void MainWindow::onSaveClicked()
     if (!fileName.endsWith(".sbxproj")) fileName += ".sbxproj";
 
     ProjectSerializer serializer;
-    if (serializer.save(fileName, m_canvas)) {
+    if (serializer.save(fileName, m_canvas, m_factory)) {
         statusBar()->showMessage("Projeto salvo com sucesso: " + fileName);
     } else {
         statusBar()->showMessage("Erro ao salvar projeto.");
@@ -300,3 +326,70 @@ void MainWindow::onOpenClicked()
     }
 }
 
+void MainWindow::createToolbox(int style)
+{
+    // Remover toolbox atual se existir
+    if (m_toolbox) {
+        m_dockToolbox->setWidget(nullptr);
+        delete m_toolbox;
+        m_toolbox = nullptr;
+    }
+
+    // Criar novo toolbox baseado no estilo
+    if (style == 0) {
+        m_toolbox = new ToolboxClassic(m_dockToolbox);
+    } else {
+        m_toolbox = new ToolboxTree(m_dockToolbox);
+    }
+
+    populateToolbox(m_toolbox);
+    m_dockToolbox->setWidget(m_toolbox);
+}
+
+void MainWindow::populateToolbox(AbstractToolbox *toolbox)
+{
+    // 0. Layouts
+    toolbox->addCategory("Layouts", {
+        "HBoxLayout", "VBoxLayout", "GridLayout", "FormLayout"
+    });
+
+    // 1. Spacers
+    toolbox->addCategory("Spacers", {
+        "HorizontalSpacer", "VerticalSpacer"
+    });
+
+    // 2. Controles Básicos
+    toolbox->addCategory("Básico", {
+        "Label", "PushButton", "CheckBox", "RadioButton", "Separator"
+    });
+
+    // 3. Entrada de Dados
+    toolbox->addCategory("Entrada", {
+        "LineEdit", "TextEdit", "SpinBox", "Slider", "ComboBox", "Calendar"
+    });
+
+    // 4. Dados & Visualização
+    toolbox->addCategory("Dados", {
+        "ListBox", "Table", "ProgressBar", "Chart"
+    });
+
+    // 5. Containers
+    toolbox->addCategory("Containers", {
+        "GroupBox", "Frame", "TabWidget", "ScrollArea"
+    });
+}
+
+void MainWindow::onToolboxStyleChanged(int style)
+{
+    if (style == m_toolboxStyle) return;
+
+    m_toolboxStyle = style;
+    createToolbox(style);
+
+    // Salvar preferência
+    QSettings settings("Showbox", "ShowboxStudio");
+    settings.setValue("toolboxStyle", style);
+
+    QString styleName = (style == 0) ? "Classic" : "Tree";
+    statusBar()->showMessage("Estilo do Toolbox alterado para: " + styleName);
+}

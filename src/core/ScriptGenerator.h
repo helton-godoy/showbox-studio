@@ -4,6 +4,8 @@
 #include <QString>
 #include <QWidget>
 #include <QObject>
+#include <QMap>
+#include <QStringList>
 
 class ScriptGenerator
 {
@@ -36,6 +38,22 @@ private:
      * @brief Extracts relevant properties for the 'add' command.
      */
     QString getPropertiesString(QWidget *widget);
+    
+    /**
+     * @brief Extracts and stores widget actions for callback generation.
+     * @param widget The widget to extract actions from.
+     * @param widgetName The name of the widget.
+     */
+    void collectActions(QWidget *widget, const QString &widgetName);
+    
+    /**
+     * @brief Generates callback functions for all collected actions.
+     * @return String containing all callback function definitions.
+     */
+    QString generateCallbacks();
+    
+    // Armazena callbacks: widgetName_event -> lista de comandos
+    QMap<QString, QStringList> m_callbacks;
 };
 
 #endif // SCRIPTGENERATOR_H

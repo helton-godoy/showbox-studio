@@ -11,7 +11,7 @@ ProjectSerializer::ProjectSerializer()
 {
 }
 
-bool ProjectSerializer::save(const QString &filename, QWidget *root)
+bool ProjectSerializer::save(const QString &filename, QWidget *root, IStudioWidgetFactory *factory)
 {
     if (!root) return false;
 
@@ -24,7 +24,7 @@ bool ProjectSerializer::save(const QString &filename, QWidget *root)
             // Ignorar widgets internos (ex: handles de resize, se houver)
             // Usamos a presença de 'showbox_type' como filtro
             if (w->property("showbox_type").isValid()) {
-                rootArray.append(serializeWidget(w));
+                rootArray.append(serializeWidget(w, factory));
             }
         }
     }
@@ -42,7 +42,7 @@ bool ProjectSerializer::save(const QString &filename, QWidget *root)
     return true;
 }
 
-QJsonObject ProjectSerializer::serializeWidget(QWidget *widget)
+QJsonObject ProjectSerializer::serializeWidget(QWidget *widget, IStudioWidgetFactory *factory)
 {
     QJsonObject obj;
     
@@ -74,6 +74,13 @@ QJsonObject ProjectSerializer::serializeWidget(QWidget *widget)
     props["x"] = widget->x();
     props["y"] = widget->y();
 
+    props["y"] = widget->y();
+
+    // Delegate specific serialization to factory
+    if (factory) {
+        factory->serializeWidget(widget, props);
+    }
+    
     obj["properties"] = props;
 
     // Filhos (Recursão)
@@ -92,7 +99,7 @@ QJsonObject ProjectSerializer::serializeWidget(QWidget *widget)
 
     for (QWidget *child : childWidgets) {
         if (child->property("showbox_type").isValid()) {
-            childrenArray.append(serializeWidget(child));
+            childrenArray.append(serializeWidget(child, factory));
         }
     }
 
@@ -146,6 +153,11 @@ QWidget* ProjectSerializer::deserializeWidget(const QJsonObject &json, IStudioWi
         if (key == "x" || key == "y" || key == "width" || key == "height") continue;
 
         widget->setProperty(key.toUtf8().constData(), val.toVariant());
+    }
+
+    // Delegate specific deserialization to factory
+    if (factory) {
+        factory->deserializeWidget(widget, props);
     }
 
     // Geometria (se aplicável e sem layout pai)

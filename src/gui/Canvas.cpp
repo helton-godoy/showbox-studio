@@ -5,7 +5,9 @@
 #include <QMimeData>
 #include <QDebug>
 #include <QListWidget>
+#include <QTreeWidget>
 #include <QMenu>
+#include <QStyle>
 
 Canvas::Canvas(IStudioWidgetFactory *factory, QWidget *parent) 
     : QWidget(parent), m_factory(factory)
@@ -14,7 +16,9 @@ Canvas::Canvas(IStudioWidgetFactory *factory, QWidget *parent)
     m_layout->setAlignment(Qt::AlignTop);
     
     // Visual do Canvas (parecido com uma janela de diálogo)
-    setStyleSheet("Canvas { background-color: #f0f0f0; border: 1px solid #ccc; }");
+    // O seletor *[selected="true"] garante que a borda de seleção não apague as cores do usuário
+    setStyleSheet("Canvas { background-color: #f0f0f0; border: 1px solid #ccc; } "
+                  "*[selected=\"true\"] { border: 2px solid #0078d7; }");
     
     setAcceptDrops(true);
 }
@@ -94,13 +98,32 @@ void Canvas::setSelectedWidget(QWidget *widget)
 
 void Canvas::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasText() || qobject_cast<QListWidget*>(event->source())) {
+    // Aceitar drag de QListWidget (Classic) ou QTreeWidget (Tree)
+    if (event->mimeData()->hasText() || 
+        qobject_cast<QListWidget*>(event->source()) ||
+        qobject_cast<QTreeWidget*>(event->source())) {
         event->acceptProposedAction();
     }
 }
 
 void Canvas::dragMoveEvent(QDragMoveEvent *event)
 {
+    // Highlight container quando arrasta sobre ele
+    QWidget *container = findContainerAtPos(event->position().toPoint());
+    
+    // Remover highlight do container anterior se houver
+    static QWidget *lastHighlighted = nullptr;
+    if (lastHighlighted && lastHighlighted != container) {
+        highlightContainer(lastHighlighted, false);
+    }
+    
+    if (container && container != this) {
+        highlightContainer(container, true);
+        lastHighlighted = container;
+    } else {
+        lastHighlighted = nullptr;
+    }
+    
     event->acceptProposedAction();
 }
 
@@ -112,9 +135,20 @@ void Canvas::dropEvent(QDropEvent *event)
     if (mime->hasText()) {
         type = mime->text();
     } else if (QListWidget *list = qobject_cast<QListWidget*>(event->source())) {
+        // Modo Classic (QToolBox com QListWidget)
         QList<QListWidgetItem*> items = list->selectedItems();
         if (!items.isEmpty()) {
             type = items.first()->text();
+        }
+    } else if (QTreeWidget *tree = qobject_cast<QTreeWidget*>(event->source())) {
+        // Modo Tree (QTreeWidget)
+        QList<QTreeWidgetItem*> items = tree->selectedItems();
+        if (!items.isEmpty()) {
+            QTreeWidgetItem *item = items.first();
+            // Apenas itens folha (sem filhos) são widgets
+            if (item->childCount() == 0) {
+                type = item->text(0);
+            }
         }
     }
 
@@ -126,12 +160,72 @@ void Canvas::dropEvent(QDropEvent *event)
     QWidget *newWidget = m_factory->createWidget(type, name);
 
     if (newWidget) {
-        if (m_controller) {
-            m_controller->undoStack()->push(new AddWidgetCommand(this, newWidget));
+        // Detectar se o drop foi sobre um container que aceita filhos
+        QWidget *targetContainer = findContainerAtPos(event->position().toPoint());
+        
+        if (targetContainer && targetContainer != this) {
+            // Adicionar ao layout do container
+            if (QLayout *containerLayout = targetContainer->layout()) {
+                newWidget->setParent(targetContainer);
+                containerLayout->addWidget(newWidget);
+                newWidget->show();
+                
+                // Feedback visual
+                highlightContainer(targetContainer, false);
+            } else {
+                // Container sem layout, adicionar ao canvas normalmente
+                addWidget(newWidget);
+            }
         } else {
-            addWidget(newWidget);
+            // Drop no canvas principal
+            if (m_controller) {
+                m_controller->undoStack()->push(new AddWidgetCommand(this, newWidget));
+            } else {
+                addWidget(newWidget);
+            }
         }
+        
         emit widgetAdded(newWidget);
         event->acceptProposedAction();
     }
+}
+
+QWidget* Canvas::findContainerAtPos(const QPoint &pos)
+{
+    // Iterar pelos widgets filhos em ordem reversa (os de cima primeiro)
+    QList<QWidget*> children = findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
+    
+    for (int i = children.size() - 1; i >= 0; --i) {
+        QWidget *child = children[i];
+        if (!child->isVisible()) continue;
+        
+        // Verificar se o ponto está dentro do widget
+        QRect childRect = child->geometry();
+        if (childRect.contains(pos)) {
+            // Verificar se é um container (tem layout)
+            QString showboxType = child->property("showbox_type").toString();
+            if (showboxType.contains("layout") || 
+                showboxType == "groupbox" || 
+                showboxType == "frame" ||
+                showboxType == "scrollarea") {
+                return child;
+            }
+        }
+    }
+    
+    return nullptr;
+}
+
+void Canvas::highlightContainer(QWidget *container, bool highlight)
+{
+    if (!container) return;
+    
+    if (highlight) {
+        container->setProperty("drop_target", true);
+        container->setStyleSheet(container->styleSheet() + " QWidget[drop_target=\"true\"] { border: 2px solid #00ff00; }");
+    } else {
+        container->setProperty("drop_target", false);
+        // Restaurar estilo original (a propriedade será removida no próximo update)
+    }
+    container->style()->polish(container);
 }

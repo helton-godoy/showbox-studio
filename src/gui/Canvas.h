@@ -40,6 +40,10 @@ private:
     IStudioWidgetFactory *m_factory;
     StudioController *m_controller = nullptr;
     QWidget *m_currentSelection = nullptr;
+    
+    // Suporte a drop em containers
+    QWidget* findContainerAtPos(const QPoint &pos);
+    void highlightContainer(QWidget *container, bool highlight);
 };
 
 #endif // CANVAS_H

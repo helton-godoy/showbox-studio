@@ -1,5 +1,8 @@
 #include "StudioController.h"
 #include <QFrame>
+#include <QStyle>
+#include <QElapsedTimer>
+#include <QDebug>
 
 StudioController::StudioController(QObject *parent) : QObject(parent)
 {
@@ -8,6 +11,9 @@ StudioController::StudioController(QObject *parent) : QObject(parent)
 
 void StudioController::manageWidget(QWidget *widget)
 {
+    QElapsedTimer timer;
+    timer.start();
+
     // Instalamos o filtro para interceptar cliques
     widget->installEventFilter(this);
     
@@ -16,6 +22,11 @@ void StudioController::manageWidget(QWidget *widget)
         if (QWidget *w = qobject_cast<QWidget*>(child)) {
             manageWidget(w);
         }
+    }
+    
+    // Log apenas se demorar mais que 1ms para evitar spam em recursão
+    if (timer.elapsed() > 1) {
+         qDebug() << "[PERF] manageWidget" << widget << "took" << timer.elapsed() << "ms";
     }
 }
 
@@ -45,32 +56,61 @@ bool StudioController::eventFilter(QObject *watched, QEvent *event)
 
 void StudioController::selectWidget(QWidget *widget)
 {
+    QElapsedTimer timer;
+    timer.start();
+
+    // Se clicar no mesmo widget único já selecionado, não fazer nada (otimização)
+    if (m_selectedWidgets.size() == 1 && m_selectedWidgets.first() == widget) {
+        return;
+    }
+
     // Limpar destaques antigos
     for (QWidget *w : m_selectedWidgets) {
-        if (w) w->setStyleSheet("");
+        if (w) {
+            // Só desmarcar se realmente estava marcado
+            if (w->property("selected").toBool()) {
+                w->setProperty("selected", false);
+                w->style()->unpolish(w);
+                w->style()->polish(w);
+            }
+        }
     }
     m_selectedWidgets.clear();
 
     if (widget) {
         m_selectedWidgets.append(widget);
-        widget->setStyleSheet("border: 2px solid #0078d7;");
+        // Só marcar se não estava
+        if (!widget->property("selected").toBool()) {
+            widget->setProperty("selected", true);
+            widget->style()->unpolish(widget);
+            widget->style()->polish(widget);
+        }
     }
 
     emit selectionChanged();
     emit widgetSelected(widget);
+    
+    // Log apenas se demorar
+    if (timer.elapsed() > 5) {
+        qDebug() << "[PERF] selectWidget took" << timer.elapsed() << "ms";
+    }
 }
+
 
 void StudioController::multiSelectWidget(QWidget *widget)
 {
     if (!widget) return;
 
     if (m_selectedWidgets.contains(widget)) {
-        widget->setStyleSheet("");
+        widget->setProperty("selected", false);
         m_selectedWidgets.removeOne(widget);
     } else {
         m_selectedWidgets.append(widget);
-        widget->setStyleSheet("border: 2px solid #0078d7;");
+        widget->setProperty("selected", true);
     }
+    
+    widget->style()->unpolish(widget);
+    widget->style()->polish(widget);
 
     emit selectionChanged();
     emit widgetSelected(m_selectedWidgets.isEmpty() ? nullptr : m_selectedWidgets.last());
