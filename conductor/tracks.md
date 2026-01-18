@@ -4,7 +4,9 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Visual Refinement & Asset Management**
+- [x] **Track: Performance & Stability Audit**
+      _Link: [./tracks/performance_stability_audit_v1_20260117/](./tracks/performance_stability_audit_v1_20260117/)_
+- [ ] **Track: Visual Refinement & Asset Management**
       _Link: [./tracks/visual_refinement_assets_v1_20260117/](./tracks/visual_refinement_assets_v1_20260117/)_
 - [x] **Track: Studio Persistence & Code Generation**
       _Link: [./tracks/studio_persistence_v1_20260117/](./tracks/studio_persistence_v1_20260117/)_

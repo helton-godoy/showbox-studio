@@ -1,16 +1,16 @@
 # Implementation Plan: Visual Refinement & Asset Management
 
-## Phase 1: Specialized Property Delegates
+## Phase 1: Specialized Property Delegates [checkpoint: 0a0af86]
 
 Implementar editores visuais básicos para o `PropertyEditor`.
 
-- [~] Task: Implement Color Picker Delegate
-  - [ ] Detect color properties.
-  - [ ] Show color preview in cell.
-  - [ ] Connect `QColorDialog`.
-- [ ] Task: Implement Font Delegate
-  - [ ] Detect font properties.
-  - [ ] Connect `QFontDialog`.
+- [x] Task: Implement Color Picker Delegate [0a0af86]
+  - [x] Detect color properties.
+  - [x] Show color preview in cell.
+  - [x] Connect `QColorDialog`.
+- [x] Task: Implement Font Delegate [0a0af86]
+  - [x] Detect font properties.
+  - [x] Connect `QFontDialog`.
 
 ## Phase 2: Icon Browser & Selection
 
