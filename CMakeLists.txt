@@ -37,6 +37,14 @@ set(STUDIO_SOURCES
     src/gui/ObjectInspector.h
     src/gui/PropertyEditor.cpp
     src/gui/PropertyEditor.h
+    src/gui/ActionEditor.cpp
+    src/gui/ActionEditor.h
+    src/gui/toolbox/AbstractToolbox.cpp
+    src/gui/toolbox/AbstractToolbox.h
+    src/gui/toolbox/ToolboxClassic.cpp
+    src/gui/toolbox/ToolboxClassic.h
+    src/gui/toolbox/ToolboxTree.cpp
+    src/gui/toolbox/ToolboxTree.h
     src/core/StudioController.cpp
     src/core/StudioController.h
     src/core/ScriptGenerator.cpp
@@ -45,6 +53,8 @@ set(STUDIO_SOURCES
     src/core/ProjectSerializer.h
     src/core/StudioWidgetFactory.h
     src/core/IStudioWidgetFactory.h
+    src/core/PreviewManager.cpp
+    src/core/PreviewManager.h
 )
 
 add_executable(showbox-studio 
