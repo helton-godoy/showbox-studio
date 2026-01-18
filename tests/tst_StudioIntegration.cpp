@@ -106,9 +106,8 @@ void tst_StudioIntegration::testCanvasSelection()
     QWidget *selected = spy.takeFirst().at(0).value<QWidget*>();
     QCOMPARE(selected, lbl);
     
-    // Verificar se o estilo foi aplicado (borda azul)
-    // Nota: StyleSheets são strings, podemos checar se contém a borda
-    QVERIFY(lbl->styleSheet().contains("border: 2px solid #0078d7"));
+    // Verificar se a propriedade dinâmica foi setada (para styling via qss)
+    QVERIFY(lbl->property("selected").toBool() == true);
 }
 
 QTEST_MAIN(tst_StudioIntegration)

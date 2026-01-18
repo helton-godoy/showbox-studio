@@ -46,7 +46,7 @@ void tst_ProjectSerializer::testSaveLoad()
     tempFile.close(); // Fechar para permitir escrita pelo Serializer
 
     ProjectSerializer serializer;
-    bool saved = serializer.save(filename, root);
+    bool saved = serializer.save(filename, root, m_factory);
     QVERIFY(saved);
 
     // 3. Carregar

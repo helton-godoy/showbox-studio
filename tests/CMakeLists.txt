@@ -130,3 +130,27 @@ target_include_directories(tst_Hierarchy PRIVATE
 )
 
 add_test(NAME tst_Hierarchy COMMAND tst_Hierarchy)
+
+# --- Teste de Performance de Estilo (Novo) ---
+set(STYLE_PERF_SOURCES
+    tst_StylePerformance.cpp
+    ../src/core/StudioController.cpp
+    ../src/gui/Canvas.cpp
+)
+
+add_executable(tst_StylePerformance ${STYLE_PERF_SOURCES})
+
+target_link_libraries(tst_StylePerformance PRIVATE 
+    Qt6::Test 
+    Qt6::Widgets
+    Qt6::Charts
+    Qt6::Svg
+    showbox-ui
+)
+
+target_include_directories(tst_StylePerformance PRIVATE 
+    "${CMAKE_CURRENT_SOURCE_DIR}/../src"
+    "${SHOWBOX_UI_INCLUDE}"
+)
+
+add_test(NAME tst_StylePerformance COMMAND tst_StylePerformance)

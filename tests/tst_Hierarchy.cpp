@@ -10,7 +10,37 @@ class tst_Hierarchy : public QObject
 
 private slots:
     void testReparentingLogic();
+    void testPerformanceScale();
 };
+
+void tst_Hierarchy::testPerformanceScale()
+{
+    ObjectInspector inspector;
+    QWidget root;
+    root.setProperty("showbox_type", "window");
+
+    auto createChildren = [&](QWidget *parent, int count) {
+        for(int i=0; i<count; ++i) {
+            QWidget *child = new QWidget(parent);
+            child->setObjectName(QString("widget_%1").arg(i));
+            child->setProperty("showbox_type", "pushbutton"); // Não recursivo por padrão
+        }
+    };
+
+    qDebug() << "--- Performance Scale Test ---";
+    
+    // 10 Widgets
+    createChildren(&root, 10);
+    inspector.updateHierarchy(&root);
+    
+    // 50 Widgets
+    createChildren(&root, 40);
+    inspector.updateHierarchy(&root);
+    
+    // 200 Widgets
+    createChildren(&root, 150);
+    inspector.updateHierarchy(&root);
+}
 
 void tst_Hierarchy::testReparentingLogic()
 {
