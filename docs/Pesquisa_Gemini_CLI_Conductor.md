@@ -102,10 +102,10 @@ gemini analyze coverage --threshold 80
 
 ```bash
 # Integração com servidor de arquivos
-gemini mcp connect filesystem --path /home/helton/git/showbox-studio
+gemini mcp connect filesystem --path /home/helton/git/SHantilly-studio
 
 # Integração com Git
-gemini mcp connect git --repo showbox-studio
+gemini mcp connect git --repo SHantilly-studio
 
 # Uso em workflows de automação
 gemini "Analise as mudanças no último commit" --context git
@@ -165,9 +165,9 @@ git clone https://github.com/google-gemini/gemini-cli.git
 cd gemini-cli && npm install -g .
 
 # Setup Showbox-Studio
-cd /home/helton/git/showbox-studio
+cd /home/helton/git/SHantilly-studio
 mkdir build && cd build
-cmake .. -DSHOWBOX_ROOT=../showbox
+cmake .. -DSHOWBOX_ROOT=../SHantilly
 make -j$(nproc)
 ```
 
@@ -225,7 +225,7 @@ git notes add -m "Task: Real-time preview\\nTests: Generated with Gemini CLI\\nC
 4. **Templates de Prompt:** Crie templates específicos para o ecossistema Showbox:
 
    ```bash
-   gemini --template showbox-widget "Crie um widget QPushButton personalizado seguindo padrões Qt6"
+   gemini --template SHantilly-widget "Crie um widget QPushButton personalizado seguindo padrões Qt6"
    ```
 
 5. **Monitoramento de Qualidade:** Use Gemini para análise contínua:

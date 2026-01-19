@@ -54,7 +54,7 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Diretório de trabalho padrão (será sobrescrito pelo script)
-WORKDIR /workspace/showbox-studio
+WORKDIR /workspace/SHantilly-Studio
 
 # Comando padrão
 CMD ["/bin/bash"]

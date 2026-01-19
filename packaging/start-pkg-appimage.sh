@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 STUDIO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 WORKSPACE_ROOT="$(cd "${STUDIO_ROOT}/.." && pwd)"
 
-IMAGE_NAME="showbox-studio-dev:latest"
+IMAGE_NAME="SHantilly-Studio-dev:latest"
 
 echo "=== Showbox Studio Packaging Orchestrator ==="
 echo "Workspace: ${WORKSPACE_ROOT}"
@@ -18,6 +18,6 @@ docker run --rm \
 	-v "${WORKSPACE_ROOT}:/workspace" \
 	-e HOME=/tmp \
 	-e APPIMAGE_EXTRACT_AND_RUN=1 \
-	-w "/workspace/showbox-studio" \
+	-w "/workspace/SHantilly-Studio" \
 	"${IMAGE_NAME}" \
 	bash packaging/appimage/build.sh

@@ -231,7 +231,7 @@ void ActionEditor::loadActionsFromWidget() {
   if (!m_target)
     return;
 
-  QVariant actionsVar = m_target->property("showbox_actions");
+  QVariant actionsVar = m_target->property("SHantilly_actions");
   if (!actionsVar.isValid() || actionsVar.toString().isEmpty()) {
     m_actionsData = QJsonObject();
     return;
@@ -246,7 +246,7 @@ void ActionEditor::saveActionsToWidget() {
     return;
 
   QJsonDocument doc(m_actionsData);
-  m_target->setProperty("showbox_actions",
+  m_target->setProperty("SHantilly_actions",
                         QString(doc.toJson(QJsonDocument::Compact)));
 
   emit actionsChanged();

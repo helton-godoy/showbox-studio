@@ -15,7 +15,7 @@ I need to remove the unnecessary comments and fix the Qt6 includes. Let me updat
 
 
 
-I see there's already a CMakeLists.txt for the showbox-studio project. I need to create a separate CMakeLists.txt for the StringUtils test. Let me create it in a subdirectory:
+I see there's already a CMakeLists.txt for the SHantilly-studio project. I need to create a separate CMakeLists.txt for the StringUtils test. Let me create it in a subdirectory:
 
 
 

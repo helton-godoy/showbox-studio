@@ -17,13 +17,13 @@ void tst_Hierarchy::testPerformanceScale()
 {
     ObjectInspector inspector;
     QWidget root;
-    root.setProperty("showbox_type", "window");
+    root.setProperty("SHantilly_type", "window");
 
     auto createChildren = [&](QWidget *parent, int count) {
         for(int i=0; i<count; ++i) {
             QWidget *child = new QWidget(parent);
             child->setObjectName(QString("widget_%1").arg(i));
-            child->setProperty("showbox_type", "pushbutton"); // Não recursivo por padrão
+            child->setProperty("SHantilly_type", "pushbutton"); // Não recursivo por padrão
         }
     };
 

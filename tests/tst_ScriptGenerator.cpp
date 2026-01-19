@@ -50,7 +50,7 @@ void tst_ScriptGenerator::testBasicGeneration()
     qDebug() << "Generated Script:\n" << output;
 
     QVERIFY(output.contains("#!/bin/bash"));
-    QVERIFY(output.contains("showbox << EOD"));
+    QVERIFY(output.contains("SHantilly << EOD"));
     // Verificar linhas específicas
     QVERIFY(output.contains("add button \"Button\" btn1"));
     QVERIFY(output.contains("add label \"Label\" lbl1"));

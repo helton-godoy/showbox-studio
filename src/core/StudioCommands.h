@@ -226,11 +226,11 @@ public:
           m_containerType, m_containerType.toLower() + "_group");
       // Configurar layout padrão se for Frame/GroupBox
       if (m_containerType == "Frame") {
-        m_container->setProperty("showbox_type", "frame");
+        m_container->setProperty("SHantilly_type", "frame");
         auto *l = new QHBoxLayout(m_container);
         l->setContentsMargins(5, 5, 5, 5);
       } else if (m_containerType == "GroupBox") {
-        m_container->setProperty("showbox_type", "groupbox");
+        m_container->setProperty("SHantilly_type", "groupbox");
         auto *l = new QVBoxLayout(m_container);
         l->setContentsMargins(5, 15, 5, 5);
       }

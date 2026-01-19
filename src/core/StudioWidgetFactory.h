@@ -90,7 +90,7 @@ public:
       w->layout()->setContentsMargins(5, 5, 5, 5);
       w->layout()->setSpacing(2);
       // Garantir que a página se identifique corretamente
-      w->setProperty("showbox_type", "page");
+      w->setProperty("SHantilly_type", "page");
       w->setProperty("title", "New Page"); // Propriedade para o nome da aba
     } else if (t == "combobox") {
       Showbox::Models::ComboBoxConfig cfg;
@@ -188,7 +188,7 @@ public:
   void serializeWidget(QWidget *widget, QJsonObject &json) override {
     if (!widget)
       return;
-    QString t = widget->property("showbox_type").toString();
+    QString t = widget->property("SHantilly_type").toString();
 
     if (t == "table") {
       if (auto *table = qobject_cast<QTableWidget *>(widget)) {
@@ -220,7 +220,7 @@ public:
   void deserializeWidget(QWidget *widget, const QJsonObject &json) override {
     if (!widget)
       return;
-    QString t = widget->property("showbox_type").toString();
+    QString t = widget->property("SHantilly_type").toString();
 
     if (t == "table") {
       if (auto *table = qobject_cast<QTableWidget *>(widget)) {
@@ -272,7 +272,7 @@ private:
     else if (cliName == "dropdownlist") cliName = "combobox";
     else if (cliName == "line") cliName = "separator";
     
-    widget->setProperty("showbox_type", cliName);
+    widget->setProperty("SHantilly_type", cliName);
   }
 };
 

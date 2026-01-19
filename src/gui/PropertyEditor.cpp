@@ -48,7 +48,7 @@ void PropertyEditor::setTargetWidget(QWidget *widget) {
   }
 
   // --- Propriedade Virtual: LAYOUT (apenas para containers) ---
-  QString type = widget->property("showbox_type").toString();
+  QString type = widget->property("SHantilly_type").toString();
   if (type == "window" || type == "groupbox" || type == "frame" ||
       type == "page") {
     addLayoutPropertyRow(widget);

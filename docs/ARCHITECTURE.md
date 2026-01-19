@@ -22,7 +22,7 @@ O Showbox Studio é um ambiente de desenvolvimento integrado (IDE) visual para c
 
 ### Estrutura de Diretórios
 ```
-showbox-studio/
+SHantilly-studio/
 ├── src/                    # Código fonte
 │   ├── main.cpp           # Ponto de entrada
 │   ├── core/              # Lógica de negócio

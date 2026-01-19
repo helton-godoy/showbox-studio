@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(showbox-studio LANGUAGES CXX)
+project(SHantilly-studio LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,17 +15,17 @@ set(CMAKE_AUTORCC ON)
 
 # Configuração do caminho do Showbox Core
 if(NOT SHOWBOX_ROOT)
-    get_filename_component(SHOWBOX_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../showbox" ABSOLUTE)
+    get_filename_component(SHOWBOX_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../SHantilly" ABSOLUTE)
 endif()
 message(STATUS "Using SHOWBOX_ROOT: ${SHOWBOX_ROOT}")
 
 # Localização da Biblioteca Showbox UI
-set(SHOWBOX_UI_DIR "${SHOWBOX_ROOT}/libs/showbox-ui")
+set(SHOWBOX_UI_DIR "${SHOWBOX_ROOT}/libs/SHantilly-ui")
 set(SHOWBOX_UI_INCLUDE "${SHOWBOX_UI_DIR}/include")
 set(SHOWBOX_UI_LIB_DIR "${SHOWBOX_ROOT}/build/lib")
 
 # Importar a Biblioteca Showbox UI via subdiretório
-add_subdirectory("${SHOWBOX_UI_DIR}" "libs/showbox-ui")
+add_subdirectory("${SHOWBOX_UI_DIR}" "libs/SHantilly-ui")
 
 # Fontes do Studio
 set(STUDIO_SOURCES 
@@ -58,21 +58,21 @@ set(STUDIO_SOURCES
     src/core/PreviewManager.h
 )
 
-add_executable(showbox-studio 
+add_executable(SHantilly-studio 
     ${STUDIO_SOURCES}
 )
 
 # Includes
-target_include_directories(showbox-studio PRIVATE 
+target_include_directories(SHantilly-studio PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
 # Linkagem
-target_link_libraries(showbox-studio PRIVATE 
+target_link_libraries(SHantilly-studio PRIVATE 
     Qt6::Widgets 
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 enable_testing()
@@ -84,19 +84,19 @@ add_subdirectory(tests)
 include(GNUInstallDirs)
 
 # Instala o binário em usr/bin
-install(TARGETS showbox-studio
+install(TARGETS SHantilly-studio
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     BUNDLE DESTINATION .
 )
 
 # Instala o ícone SVG (Scalable) para garantir alta definição
 # O comando RENAME garante que o ícone tenha o nome esperado pelo .desktop
-install(FILES packaging/icon/showbox-studio.svg 
+install(FILES packaging/icon/SHantilly-studio.svg 
     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps
-    RENAME showbox-studio.svg
+    RENAME SHantilly-studio.svg
 )
 
 # Instala o arquivo .desktop
-install(FILES packaging/appimage/showbox-studio.desktop 
+install(FILES packaging/appimage/SHantilly-studio.desktop 
     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications
 )

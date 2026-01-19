@@ -3,8 +3,8 @@ set -e
 
 # Configurações de Caminhos
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PROJECT_ROOT="/workspace/showbox-studio"
-SHOWBOX_ROOT="/workspace/showbox"
+PROJECT_ROOT="/workspace/SHantilly-Studio"
+SHOWBOX_ROOT="/workspace/SHantilly"
 BUILD_DIR="${PROJECT_ROOT}/build-pkg"
 DIST_DIR="${PROJECT_ROOT}/dist"
 APPDIR="${BUILD_DIR}/AppDir"
@@ -53,8 +53,8 @@ echo "[4/6] Running linuxdeploy (bundling dependencies)..."
 	--appdir "${APPDIR}" \
 	--plugin qt \
 	--custom-apprun "${PROJECT_ROOT}/packaging/appimage/AppRun" \
-	--icon-file "${APPDIR}/usr/share/icons/hicolor/scalable/apps/showbox-studio.svg" \
-	--desktop-file "${APPDIR}/usr/share/applications/showbox-studio.desktop"
+	--icon-file "${APPDIR}/usr/share/icons/hicolor/scalable/apps/SHantilly-Studio.svg" \
+	--desktop-file "${APPDIR}/usr/share/applications/SHantilly-Studio.desktop"
 
 echo "[5/6] Packaging with appimagetool manually..."
 # Forçamos o uso do runtime local

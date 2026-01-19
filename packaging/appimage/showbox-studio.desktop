@@ -2,7 +2,7 @@
 Type=Application
 Name=Showbox Studio
 Comment=Visual Editor for Showbox Dialogs
-Exec=showbox-studio
-Icon=showbox-studio
+Exec=SHantilly-Studio
+Icon=SHantilly-Studio
 Categories=Development;IDE;GUIDesigner;
 Terminal=false

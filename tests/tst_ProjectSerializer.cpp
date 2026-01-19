@@ -71,7 +71,7 @@ void tst_ProjectSerializer::testSaveLoad()
     
     QCOMPARE(loadedBtn->property("text").toString(), "Save Me");
     QCOMPARE(loadedChk->property("checked").toBool(), true);
-    QCOMPARE(loadedBtn->property("showbox_type").toString(), "pushbutton"); // lower case
+    QCOMPARE(loadedBtn->property("SHantilly_type").toString(), "pushbutton"); // lower case
 
     delete root;
     qDeleteAll(loadedWidgets);

@@ -28,7 +28,7 @@ QString ScriptGenerator::generate(QWidget *root) {
     script += "\n";
   }
 
-  script += "showbox << EOD\n";
+  script += "SHantilly << EOD\n";
 
   // Criar uma janela principal implícita para conter os widgets do Canvas
   script += "add window \"Preview\" main_window width=800 height=600\n\n";
@@ -53,7 +53,7 @@ void ScriptGenerator::processWidget(QWidget *widget, QString &script) {
     return;
 
   // Ignorar widgets internos ou não gerenciados
-  if (widget->property("showbox_ignore").toBool())
+  if (widget->property("SHantilly_ignore").toBool())
     return;
 
   QString type = getShowboxType(widget);
@@ -86,8 +86,8 @@ void ScriptGenerator::processWidget(QWidget *widget, QString &script) {
   QString options = getPropertiesString(widget);
 
   // Adicionar referência ao callback se houver ações definidas
-  if (widget->property("showbox_actions").isValid() &&
-      !widget->property("showbox_actions").toString().isEmpty()) {
+  if (widget->property("SHantilly_actions").isValid() &&
+      !widget->property("SHantilly_actions").toString().isEmpty()) {
     // Para botões, o evento padrão é "clicked"
     if (type == "button" || type == "pushbutton") {
       options += QString(" action=\"%1_clicked\"").arg(name);
@@ -150,7 +150,7 @@ void ScriptGenerator::processWidget(QWidget *widget, QString &script) {
 
 QString ScriptGenerator::getShowboxType(QWidget *widget) {
   // Prioridade 1: Propriedade explícita definida pela Factory
-  QVariant typeProp = widget->property("showbox_type");
+  QVariant typeProp = widget->property("SHantilly_type");
   if (typeProp.isValid() && !typeProp.toString().isEmpty()) {
     return typeProp.toString();
   }
@@ -259,7 +259,7 @@ QString ScriptGenerator::getPropertiesString(QWidget *widget) {
 void ScriptGenerator::collectActions(QWidget *widget,
                                      const QString &widgetName) {
   // Verificar se o widget tem ações definidas via propriedade JSON
-  QVariant actionsVar = widget->property("showbox_actions");
+  QVariant actionsVar = widget->property("SHantilly_actions");
   if (!actionsVar.isValid())
     return;
 
@@ -294,11 +294,11 @@ void ScriptGenerator::collectActions(QWidget *widget,
         QString prop = action["property"].toString();
         QString value = action["value"].toString();
         commands
-            << QString("showbox set %1 %2 \"%3\"").arg(prop, target, value);
+            << QString("SHantilly set %1 %2 \"%3\"").arg(prop, target, value);
       } else if (type == "query") {
         QString target = action["target"].toString();
         QString variable = action["variable"].toString();
-        commands << QString("%1=$(showbox query %2)").arg(variable, target);
+        commands << QString("%1=$(SHantilly query %2)").arg(variable, target);
       }
     }
 
@@ -336,7 +336,7 @@ QString ScriptGenerator::generateCallbacks() {
     result += QString("    local WIDGET_NAME=\"%1\"\n").arg(widgetName);
     result += QString("    local EVENT=\"%1\"\n").arg(eventName);
     result += "    local TIMESTAMP=$(date +\"%Y-%m-%d %H:%M:%S\")\n";
-    result += QString("    local WIDGET_VALUE=$(showbox query %1 2>/dev/null "
+    result += QString("    local WIDGET_VALUE=$(SHantilly query %1 2>/dev/null "
                       "|| echo \"\")\n\n")
                   .arg(widgetName);
 

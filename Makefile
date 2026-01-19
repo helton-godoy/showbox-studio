@@ -12,7 +12,7 @@ MAKE := make
 NPROC := $(shell nproc)
 BUILD_DIR := .
 BIN_DIR := build
-TARGET_BIN := showbox-studio
+TARGET_BIN := SHantilly-studio
 
 # Default target
 all: docker-check-deps build
@@ -21,8 +21,8 @@ all: docker-check-deps build
 # Docker Integration
 # ============================================================================
 
-DOCKER_SCRIPT := ../showbox/src/start-dev.sh
-DOCKER_IMAGE := showbox-dev:latest
+DOCKER_SCRIPT := ../SHantilly/src/start-dev.sh
+DOCKER_IMAGE := SHantilly-dev:latest
 
 # Check if we are running inside docker
 IN_DOCKER := $(shell [ -f /.dockerenv ] && echo 1 || echo 0)
@@ -51,7 +51,7 @@ build:  ## Compile ShowBox Studio (runs inside Docker)
 build_internal: check-deps ## Internal build target
 	@echo "Building ShowBox Studio (Inside Docker)..."
 	mkdir -p $(BIN_DIR)
-	cd $(BIN_DIR) && $(CMAKE) .. -DSHOWBOX_ROOT=../showbox && $(MAKE) -j$(NPROC)
+	cd $(BIN_DIR) && $(CMAKE) .. -DSHOWBOX_ROOT=../SHantilly && $(MAKE) -j$(NPROC)
 
 clean:  ## Clean build artifacts (runs inside Docker)
 	$(call IN_DOCKER_WRAPPER,clean)

@@ -120,7 +120,7 @@ void ObjectInspector::dropEvent(QDropEvent *event) {
 
   if (widget && newParentWidget) {
     // --- VALIDAÇÃO DE CONTAINER ---
-    QString type = newParentWidget->property("showbox_type").toString();
+    QString type = newParentWidget->property("SHantilly_type").toString();
     bool isContainer = (type == "window" || type == "groupbox" ||
                         type == "frame" || type == "page");
 
@@ -228,7 +228,7 @@ void ObjectInspector::addWidgetToTree(QWidget *widget,
   // Verificar se deve recursar: Apenas containers devem expor seus filhos na
   // árvore. Widgets atômicos (Button, ComboBox) têm filhos internos (Qt
   // implementation details) que devem ser ocultados.
-  QVariant typeVar = widget->property("showbox_type");
+  QVariant typeVar = widget->property("SHantilly_type");
   bool isContainer =
       true; // Por padrão, assumimos container (útil para o Canvas/Root)
 

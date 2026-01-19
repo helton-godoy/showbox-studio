@@ -42,8 +42,8 @@ void Canvas::contextMenuEvent(QContextMenuEvent *event) {
   if (!selected.isEmpty()) {
     if (selected.size() == 1) {
       QWidget *w = selected.first();
-      QString showboxType = w->property("showbox_type").toString();
-      if (showboxType == "tabwidget") {
+      QString SHantillyType = w->property("SHantilly_type").toString();
+      if (SHantillyType == "tabwidget") {
         menu.addAction("Add Tab Page", [this, w]() { emit requestAddPage(w); });
         menu.addAction("Remove Current Page",
                        [this, w]() { emit requestRemovePage(w); });
@@ -144,7 +144,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent *event) {
   // NOTA: A Page é filha de QStackedWidget (interno do Qt), não diretamente do
   // QTabWidget.
   if (isPageDrag && container) {
-    QString cType = container->property("showbox_type").toString();
+    QString cType = container->property("SHantilly_type").toString();
     if (cType == "page") {
       // Usar qobject_cast para encontrar o QTabWidget ancestral
       QWidget *foundTabs = nullptr;
@@ -168,7 +168,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent *event) {
   }
 
   if (container && container != this) {
-    QString containerType = container->property("showbox_type").toString();
+    QString containerType = container->property("SHantilly_type").toString();
 
     // Se for Page: SÓ aceita se o container final for TabWidget
     if (isPageDrag) {
@@ -233,7 +233,7 @@ void Canvas::dropEvent(QDropEvent *event) {
     QWidget *targetContainer = findContainerAtPos(event->position().toPoint());
     qDebug() << "[DROP] Initial targetContainer:" 
              << (targetContainer ? targetContainer->objectName() : "nullptr")
-             << "type:" << (targetContainer ? targetContainer->property("showbox_type").toString() : "");
+             << "type:" << (targetContainer ? targetContainer->property("SHantilly_type").toString() : "");
 
     // Regra específica para Page:
     // Se soltar em cima de uma 'page' existente (conteúdo da aba),
@@ -241,7 +241,7 @@ void Canvas::dropEvent(QDropEvent *event) {
     // NOTA: A Page é filha de QStackedWidget (interno do Qt), não diretamente do
     // QTabWidget. Usar qobject_cast para confiabilidade.
     if (type.toLower() == "page" && targetContainer &&
-        targetContainer->property("showbox_type").toString() == "page") {
+        targetContainer->property("SHantilly_type").toString() == "page") {
       QWidget *p = targetContainer->parentWidget();
       while (p && p != this) {
         if (qobject_cast<QTabWidget *>(p)) {
@@ -255,7 +255,7 @@ void Canvas::dropEvent(QDropEvent *event) {
     // Restrição: Page só pode ser solta em TabWidget
     if (type.toLower() == "page") {
       QString targetType = targetContainer
-                               ? targetContainer->property("showbox_type").toString()
+                               ? targetContainer->property("SHantilly_type").toString()
                                : "";
       if (targetType != "tabs") {
         // Page fora de TabWidget: cancelar o drop e destruir o widget criado
@@ -266,7 +266,7 @@ void Canvas::dropEvent(QDropEvent *event) {
       // Outros widgets NÃO podem ser soltos diretamente no TabWidget (devem ir na
       // Page atual)
       if (targetContainer &&
-          targetContainer->property("showbox_type").toString() == "tabs") {
+          targetContainer->property("SHantilly_type").toString() == "tabs") {
         if (auto *tabs = qobject_cast<QTabWidget *>(targetContainer)) {
           qDebug() << "[DROP] Target is TabWidget, currentIndex:" << tabs->currentIndex()
                    << "currentWidget:" << tabs->currentWidget();
@@ -276,7 +276,7 @@ void Canvas::dropEvent(QDropEvent *event) {
       // Se o target é uma Page, verificar se é a aba ativa do TabWidget pai
       // Isso corrige o bug onde childAt() pode retornar uma Page invisível
       else if (targetContainer &&
-               targetContainer->property("showbox_type").toString() == "page") {
+               targetContainer->property("SHantilly_type").toString() == "page") {
         qDebug() << "[DROP] Target is Page:" << targetContainer->objectName();
         QWidget *p = targetContainer->parentWidget();
         while (p && p != this) {
@@ -326,11 +326,11 @@ QWidget *Canvas::findContainerAtPos(const QPoint &pos) {
 
   // Subir na hierarquia até encontrar um container válido ou chegar no Canvas
   while (child && child != this) {
-    QString showboxType = child->property("showbox_type").toString();
+    QString SHantillyType = child->property("SHantilly_type").toString();
 
-    if (showboxType.contains("layout") || showboxType == "groupbox" ||
-        showboxType == "frame" || showboxType == "scrollarea" ||
-        showboxType == "tabs" || showboxType == "page") {
+    if (SHantillyType.contains("layout") || SHantillyType == "groupbox" ||
+        SHantillyType == "frame" || SHantillyType == "scrollarea" ||
+        SHantillyType == "tabs" || SHantillyType == "page") {
       return child;
     }
     child = child->parentWidget();

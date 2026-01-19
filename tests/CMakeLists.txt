@@ -2,7 +2,7 @@ find_package(Qt6 REQUIRED COMPONENTS Test Widgets Charts Svg)
 
 # --- Teste de Configurações (Existente) ---
 add_executable(tst_WidgetConfigs tst_WidgetConfigs.cpp)
-target_link_libraries(tst_WidgetConfigs PRIVATE Qt6::Test showbox-ui)
+target_link_libraries(tst_WidgetConfigs PRIVATE Qt6::Test SHantilly-ui)
 target_include_directories(tst_WidgetConfigs PRIVATE "${SHOWBOX_UI_INCLUDE}")
 add_test(NAME tst_WidgetConfigs COMMAND tst_WidgetConfigs)
 
@@ -23,7 +23,7 @@ target_link_libraries(tst_StudioIntegration PRIVATE
     Qt6::Widgets
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 target_include_directories(tst_StudioIntegration PRIVATE 
@@ -49,7 +49,7 @@ target_link_libraries(tst_ScriptGenerator PRIVATE
     Qt6::Widgets
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 target_include_directories(tst_ScriptGenerator PRIVATE 
@@ -73,7 +73,7 @@ target_link_libraries(tst_ProjectSerializer PRIVATE
     Qt6::Widgets
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 target_include_directories(tst_ProjectSerializer PRIVATE 
@@ -99,7 +99,7 @@ target_link_libraries(tst_UndoRedo PRIVATE
     Qt6::Widgets
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 target_include_directories(tst_UndoRedo PRIVATE 
@@ -121,7 +121,7 @@ target_link_libraries(tst_Hierarchy PRIVATE
     Qt6::Widgets
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 target_include_directories(tst_Hierarchy PRIVATE 
@@ -145,7 +145,7 @@ target_link_libraries(tst_StylePerformance PRIVATE
     Qt6::Widgets
     Qt6::Charts
     Qt6::Svg
-    showbox-ui
+    SHantilly-ui
 )
 
 target_include_directories(tst_StylePerformance PRIVATE 

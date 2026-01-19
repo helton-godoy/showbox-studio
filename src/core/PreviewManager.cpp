@@ -24,7 +24,7 @@ void PreviewManager::runPreview(const QString &scriptContent) {
 
   // Assumes running from 'build' directory adjacent to sourcedir or usual cmake
   // build Try to find the executable in likely locations
-  QString executablePath = "../showbox/build/bin/showbox";
+  QString executablePath = "../SHantilly/build/bin/SHantilly";
 
   // Verify absolute path resolution from current working directory
   QString absPath = QDir::current().absoluteFilePath(executablePath);
@@ -33,7 +33,7 @@ void PreviewManager::runPreview(const QString &scriptContent) {
     // Fallback: try to find relative to the application dir if not running from
     // build root
     QDir appDir(QCoreApplication::applicationDirPath());
-    // build/bin -> ../../../showbox/build/bin (approximate guess based on
+    // build/bin -> ../../../SHantilly/build/bin (approximate guess based on
     // typical nesting) Let's rely on the user running from 'build' as per
     // instructions for now, but log path.
     emit previewError("Executable not found at: " + absPath);

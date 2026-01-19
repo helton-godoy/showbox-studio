@@ -21,8 +21,8 @@ bool ProjectSerializer::save(const QString &filename, QWidget *root,
   for (QObject *child : children) {
     if (QWidget *w = qobject_cast<QWidget *>(child)) {
       // Ignorar widgets internos (ex: handles de resize, se houver)
-      // Usamos a presença de 'showbox_type' como filtro
-      if (w->property("showbox_type").isValid()) {
+      // Usamos a presença de 'SHantilly_type' como filtro
+      if (w->property("SHantilly_type").isValid()) {
         rootArray.append(serializeWidget(w, factory));
       }
     }
@@ -46,7 +46,7 @@ QJsonObject ProjectSerializer::serializeWidget(QWidget *widget,
   QJsonObject obj;
 
   // Tipo e Nome
-  QString type = widget->property("showbox_type").toString();
+  QString type = widget->property("SHantilly_type").toString();
   obj["type"] = type;
   obj["name"] = widget->objectName();
 
@@ -104,7 +104,7 @@ QJsonObject ProjectSerializer::serializeWidget(QWidget *widget,
   }
 
   for (QWidget *child : childWidgets) {
-    if (child->property("showbox_type").isValid()) {
+    if (child->property("SHantilly_type").isValid()) {
       childrenArray.append(serializeWidget(child, factory));
     }
   }

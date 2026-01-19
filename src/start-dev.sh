@@ -2,14 +2,14 @@
 set -e
 
 # Configurações da Imagem
-IMAGE_NAME="showbox-studio-dev:latest"
+IMAGE_NAME="SHantilly-Studio-dev:latest"
 DOCKERFILE_PATH="src/dev.Dockerfile"
 
 # Diretórios
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-# IMPORTANTE: Montamos o diretório PAI (onde estão 'showbox' e 'showbox-studio')
-# para que o CMake consiga resolver '../showbox' dentro do container.
+# IMPORTANTE: Montamos o diretório PAI (onde estão 'SHantilly' e 'SHantilly-Studio')
+# para que o CMake consiga resolver '../SHantilly' dentro do container.
 WORKSPACE_ROOT="$(cd "${PROJECT_ROOT}/.." && pwd)"
 PROJECT_DIR_NAME="$(basename "${PROJECT_ROOT}")"
 
