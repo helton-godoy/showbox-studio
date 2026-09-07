@@ -1,3 +1,13 @@
+> **Status: arquivado (archive)**
+>
+> Este repositório foi **descontinuado** e consolidado no monorepo canônico
+> [**helton-godoy/showbox**](https://github.com/helton-godoy/showbox). Todo o
+> desenvolvimento ativo — motor Qt6, Studio e ferramentas visuais com Bash —
+> continua nesse repositório.
+>
+> O conteúdo desta página é mantido apenas como referência histórica. Ver submódulos,
+> issues e PRs existentes foram encerrados com o arquivamento.
+
 # Showbox Studio
 
 O **Showbox Studio** é uma IDE visual para o ecossistema Showbox, focada em empoderar profissionais de TI a criar interfaces gráficas ricas através de uma experiência drag-and-drop.
